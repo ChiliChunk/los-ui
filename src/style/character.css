@@ -3,17 +3,6 @@
     width: 200px;
 }
 
-.opponentImg{
-    margin:0;
-    padding: 0;
-}
-
-.selfImg{
-    position:fixed;
-    bottom: 0;
-    left: 0; 
-}
-
 .selfHp{
     position: fixed;
     font-size: 2em;
