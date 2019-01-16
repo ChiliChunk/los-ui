@@ -1,15 +1,15 @@
 .heroImg{
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150;
 }
 
 .selfHp{
-    position: fixed;
     font-size: 2em;
     color: white;
     margin-left: -25px;
     background-color: red;
     border-radius : 15px;
+    margin-bottom: 50%;
 }
 
 .opponentHp{
@@ -18,5 +18,4 @@
     margin-left: -25px;
     background-color: red;
     border-radius : 20px;
-
 }

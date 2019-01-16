@@ -14,7 +14,10 @@ class Game extends Component {
           <Hand type={'opponent'}/>
         </div>
         <div className='board'>
-          <Board />
+          <Board type={'opponent'}/>
+        </div>
+        <div className='board'>
+          <Board type={'self'}/>
         </div>
         <div className='panel'>
           <Character type={'self'}/>
