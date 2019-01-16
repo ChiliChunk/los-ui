@@ -8,7 +8,7 @@ import {
 
 import Signin from "./Signin";
 import Signup from "./Signup";
-import Game from "./Game";
+import Game from "./container/gameContainer";
 import "./App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
