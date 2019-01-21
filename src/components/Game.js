@@ -9,8 +9,9 @@ class Game extends Component {
   render() {
     return (
       <div className='game'>
+        <h3 onClick={() => {console.log(this.props)}}>TEST</h3>
         <div className='panel'>
-          <Character type={'opponent'}/>
+          <Character type={'opponent'} />
           <Hand type={'opponent'}/>
         </div>
         <div className='board'>
