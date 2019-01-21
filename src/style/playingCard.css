@@ -4,6 +4,7 @@
 
 .card.MuiPaper-elevation1-5 {
     width: 150px;
+    border-radius: 30px;
     /*box-shadow: 10px 10px 5px grey;*/
 
 }

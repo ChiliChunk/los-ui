@@ -1,6 +1,7 @@
 .heroImg{
     height: 150px;
     width: 150;
+    border-radius: 80px;
 }
 
 .selfHp{

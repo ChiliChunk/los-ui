@@ -9,7 +9,6 @@ class Game extends Component {
   render() {
     return (
       <div className='game'>
-        <h3 onClick={() => {console.log(this.props)}}>TEST</h3>
         <div className='panel'>
           <Character type={'opponent'} />
           <Hand type={'opponent'}/>
@@ -17,7 +16,7 @@ class Game extends Component {
         <div className='board'>
           <Board type={'opponent'}/>
         </div>
-        <div className='board'>
+        <div className='board' style={{marginTop:'15px'}}>
           <Board type={'self'}/>
         </div>
         <div className='panel'>
