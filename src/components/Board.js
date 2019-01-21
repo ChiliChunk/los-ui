@@ -11,7 +11,7 @@ class Board extends React.Component{
         }
         else{
             return (
-                <p>my Board</p>                
+                <Card/>                
             ) 
         }
     }

@@ -1,29 +1,42 @@
 import React from 'react'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import '../style/playingCard.css'
+/*
+props : urlImage : string
+        title : string
+        attackDamage : string / number
+        armor : string / number
+        description : ?
+
+*/
 class PlayingCard  extends React.Component{
     render(){
         return(
             <Card className='card'>
                 <CardActionArea>
-                    <CardMedia
-                        className='media'
-                        image="./ninja.jpg"
-                        title="A card"
+                    <img 
+                        className="imgCard" 
+                        src="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
-                        </Typography>
+                        <span className="title">
+                            Lizard
+                        </span>
+                        <span className="attack">
+                            attack : 3
+                        </span>
+                        <span className="armor">
+                            armor : 5
+                        </span>
                     </CardContent>
                 </CardActionArea>
             </Card>
         )
     }
 }
+
+
 
 export default PlayingCard
