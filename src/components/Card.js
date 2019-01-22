@@ -12,7 +12,8 @@ props : urlImage : string
 
 */
 class PlayingCard  extends React.Component{
-    render(){
+    
+    renderFace(){
         return(
             <Card className='card'>
                 <CardActionArea>
@@ -35,6 +36,29 @@ class PlayingCard  extends React.Component{
             </Card>
         )
     }
+
+    renderBack(){
+        return(
+            <Card className='card opponent'>
+                    <CardActionArea>
+                    <img 
+                        className="backCard" 
+                        src="https://i.imgur.com/fWxwxXD.png"
+                    />
+                    </CardActionArea>
+            </Card>
+        )
+    }
+    
+    render(){
+        return(
+            <div>
+                {this.props.flipped ? this.renderBack() : this.renderFace()}
+            </div>
+        )
+    }
+
+    
 }
 
 

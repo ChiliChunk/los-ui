@@ -3,6 +3,8 @@
     flex-direction: column;
     height: 100%;
     background-image: url("../board.jpg");
+    background-size: 100% 100%;
+
 }
 .panel{
     display: flex;
@@ -11,6 +13,7 @@
 
 .board{
     display: flex;
+    height: 26%;
     flex: 1 0 auto;
 }
 

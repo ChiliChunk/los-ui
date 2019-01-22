@@ -6,7 +6,7 @@ class Board extends React.Component{
         const {type} = this.props
         if (type==='opponent'){
             return (
-                <Card/>                
+                <Card flipped/>                
             )
         }
         else{

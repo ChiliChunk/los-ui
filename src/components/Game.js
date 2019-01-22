@@ -13,10 +13,10 @@ class Game extends Component {
           <Character type={'opponent'} />
           <Hand type={'opponent'}/>
         </div>
-        <div className='board'>
+        <div className='board' style={{marginBottom:'7px'}}>
           <Board type={'opponent'}/>
         </div>
-        <div className='board' style={{marginTop:'15px'}}>
+        <div className='board' style={{marginTop:'7px'}}>
           <Board type={'self'}/>
         </div>
         <div className='panel'>

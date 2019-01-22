@@ -5,8 +5,8 @@
 .card.MuiPaper-elevation1-5 {
     width: 150px;
     border-radius: 30px;
+    height: -webkit-fill-available;
     /*box-shadow: 10px 10px 5px grey;*/
-
 }
 
 .imgCard{
@@ -16,4 +16,9 @@
 
 .title {
     font-size: 1.3em;
+}
+
+.backCard{
+    height: -webkit-fill-available;
+    width: inherit;
 }
