@@ -1,6 +1,6 @@
 import React from 'react'
-import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
+import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import '../style/playingCard.css'
 /*
@@ -12,8 +12,8 @@ props : urlImage : string
 
 */
 class PlayingCard  extends React.Component{
-    
     renderFace(){
+        const {name,attack,armor} = this.props
         return(
             <Card className='card'>
                 <CardActionArea>
@@ -23,13 +23,15 @@ class PlayingCard  extends React.Component{
                     />
                     <CardContent>
                         <span className="title">
-                            Lizard
+                            {name}
                         </span>
+                        <br/>
                         <span className="attack">
-                            attack : 3
+                            attack : {attack}
                         </span>
+                        <br/>
                         <span className="armor">
-                            armor : 5
+                            armor : {armor}
                         </span>
                     </CardContent>
                 </CardActionArea>

@@ -11,17 +11,36 @@ class Game extends Component {
       <div className='game'>
         <div className='panel'>
           <Character type={'opponent'} />
-          <Hand type={'opponent'}/>
+          <Hand 
+          type={'opponent'}
+          cards ={[{name:'test1',
+                    attack : 12,
+                    armor : 15}]}/>
         </div>
         <div className='board' style={{marginBottom:'7px'}}>
-          <Board type={'opponent'}/>
+          <Board
+          type={'opponent'}
+          cards ={[{name:'test2',
+                    attack : 12,
+                    armor : 15}]}/>
         </div>
         <div className='board' style={{marginTop:'7px'}}>
-          <Board type={'self'}/>
+          <Board 
+          type={'self'}
+          cards ={[{name:'test1',
+                    attack : 12,
+                    armor : 15},
+                    {name:'test11',
+                    attack : 12,
+                    armor : 15}]}/>
         </div>
         <div className='panel'>
           <Character type={'self'}/>
-          <Hand type={'self'}/>
+          <Hand 
+          type={'self'}
+          cards ={[{name:'test1',
+                    attack : 12,
+                    armor : 15}]}/>
         </div>
       </div>
     );

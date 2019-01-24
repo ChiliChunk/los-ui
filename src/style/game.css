@@ -13,6 +13,7 @@
 
 .board{
     display: flex;
+    justify-content : center;
     height: 26%;
     flex: 1 0 auto;
 }
