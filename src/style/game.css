@@ -1,0 +1,23 @@
+.game{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-image: url("../board.jpg");
+    background-size: 100% 100%;
+
+}
+.panel{
+    display: flex;
+    flex: 0 0 23%;
+}
+
+.board{
+    display: flex;
+    justify-content : center;
+    height: 26%;
+    flex: 1 0 auto;
+}
+
+.total{
+    height: 100%;
+}

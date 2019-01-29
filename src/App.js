@@ -8,9 +8,8 @@ import {
 
 import Signin from "./Signin";
 import Signup from "./Signup";
+import Game from "./container/gameContainer";
 import Unsubscribe from "./Unsubscribe";
-import Game from "./Game";
-
 import "./App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
