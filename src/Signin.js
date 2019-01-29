@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import SimpleContainer from './container/simpleContainer'
 
 
 import { SERVER_URL } from "./consts";
@@ -24,7 +23,7 @@ class Signin extends Component {
   handleSubmit(e) {
     e.preventDefault();
     axios
-      .get( 
+      .get(
         SERVER_URL +
           "/users/connect?email=" +
           this.state.email +
@@ -48,7 +47,6 @@ class Signin extends Component {
   render() {
     return (
       <div>
-        <SimpleContainer />
         <form onSubmit={this.handleSubmit}>
           Connectez-vous :
           <div>

@@ -5,6 +5,9 @@ import MatchakingTab from "./components/MatchakingTab"
 import "./App.css";
 import axios from "axios";
 import { SERVER_URL } from "./consts";
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as userActions from './actions/userActions'
 
 class Home extends Component {
     constructor(props){
@@ -24,6 +27,7 @@ class Home extends Component {
           });
       }
     render() {
+        console.log(this.props)
         let players = ['Joueur1', 'GrosNoob', 'Joueur3']
 
         return (
@@ -40,4 +44,15 @@ class Home extends Component {
         )
     }
 }
-export default Home;
+function mapStateToProps (state) {
+    return {
+      userReducer: state.userReducer
+    }
+  }
+  
+  function mapDispatchToProps (dispatch) {
+    return {
+      userActions: bindActionCreators(userActions, dispatch),
+    }
+  }
+  export default connect(mapStateToProps, mapDispatchToProps)(Home)
