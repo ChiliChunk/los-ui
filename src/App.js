@@ -10,6 +10,7 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import Game from "./Game";
 import Home from "./home";
+
 import "./App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
