@@ -8,6 +8,7 @@ import {
 
 import Signin from "./Signin";
 import Signup from "./Signup";
+import Unsubscribe from "./Unsubscribe";
 import Game from "./Game";
 
 import "./App.css";
@@ -52,7 +53,9 @@ class App extends Component {
           />
           />
           <Route path="/signup" component={Signup} />
+          <Route path="/unsubscribe" component={Unsubscribe} />
           <PrivateRoute component={Game} isConnected={this.state.isConnected} />
+          
         </Switch>
       </Router>
     );
