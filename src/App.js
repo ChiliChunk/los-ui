@@ -8,8 +8,9 @@ import {
 
 import Signin from "./Signin";
 import Signup from "./Signup";
-import Game from "./Game";
+import Game from "./components/Game";
 import Home from "./home";
+import DeckMaker from "./components/DeckMaker";
 
 import "./App.css";
 

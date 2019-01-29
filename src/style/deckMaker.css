@@ -2,3 +2,10 @@
     display: flex;
     justify-content: center;
 }
+
+
+.cardsPacked{
+    display: flex;
+    width: 30%;
+    flex-wrap: wrap
+}
