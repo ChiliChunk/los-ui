@@ -2,11 +2,17 @@ import React from 'react'
 import '../style/deckMaker.css'
 import PlayingCard from './PlayingCard'
 
+
+import * as userActions from '../actions/userActions'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import axios from 'axios'
 const champions = require('./champion.json')
 class DeckMaker extends React.Component {
     constructor(props) {
         super(props)
         this.addCard = this.addCard.bind(this)
+
         let championsNotSelected = champions
         this.state = {
             championsNotSelected: championsNotSelected,
@@ -22,8 +28,18 @@ class DeckMaker extends React.Component {
         this.state.championsSelected.push(champion)
     }
 
+    async componentDidMount() {
+        const championsData = await this.fetchCardData()
+        this.setState({ championsData: championsData })
+    }
+
+    async fetchCardData() {
+        let response = await axios.get('http://ling.westeurope.cloudapp.azure.com/cards/getAll')
+        return response.data.data
+    }
+
     render() {
-        console.log(champions)
+        console.log(this.state)
         return (
             <div className="deckMaker">
                 <div className="cardsPacked">
@@ -48,5 +64,19 @@ class DeckMaker extends React.Component {
     }
 }
 
-export default DeckMaker
+
+function mapStateToProps(state) {
+    return {
+        userReducer: state.userReducer
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        userActions: bindActionCreators(userActions, dispatch),
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckMaker)
 
