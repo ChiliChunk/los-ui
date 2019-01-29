@@ -21,7 +21,7 @@ class DeckMaker extends React.Component{
     }
 
     async fetchCardData(){
-        let response = await axios.get(' http://localhost:3001/cards/getAll')
+        let response = await axios.get('http://ling.westeurope.cloudapp.azure.com/cards/getAll')
         return response.data.data
     }
     render(){
