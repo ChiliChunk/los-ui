@@ -1,0 +1,21 @@
+.heroImg{
+    height: 150px;
+    width: 150;
+}
+
+.selfHp{
+    font-size: 2em;
+    color: white;
+    margin-left: -25px;
+    background-color: red;
+    border-radius : 15px;
+    margin-bottom: 50%;
+}
+
+.opponentHp{
+    font-size: 2em;
+    color: white;
+    margin-left: -25px;
+    background-color: red;
+    border-radius : 20px;
+}

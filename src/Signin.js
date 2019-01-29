@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import SimpleContainer from './container/simpleContainer'
 
 
 import { SERVER_URL } from "./consts";
@@ -48,7 +47,6 @@ class Signin extends Component {
   render() {
     return (
       <div>
-        <SimpleContainer />
         <form onSubmit={this.handleSubmit}>
           Connectez-vous :
           <div>
