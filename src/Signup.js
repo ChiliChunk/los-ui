@@ -17,13 +17,11 @@ class Signup extends Component {
     this.handleChangeLogin = this.handleChangeLogin.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
-    this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(
-      this
-    );
+    this.handleChangeConfirmPassword = this.handleChangeConfirmPassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChangeLogin(e) {
-    this.setState({ login: e.target.value });
+    handleChangeLogin(e) {
+      this.setState({ login: e.target.value });
   }
   handleChangeEmail(e) {
     this.setState({ email: e.target.value });
