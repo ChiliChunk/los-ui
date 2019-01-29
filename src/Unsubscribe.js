@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-/*
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as userActions from '../actions/userActions'*/
+import * as userActions from './actions/userActions'
 
 import { SERVER_URL } from "./consts";
 
@@ -15,7 +14,6 @@ class Unsubscribe extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          email: "",
           password: ""
         };
     
@@ -30,15 +28,27 @@ class Unsubscribe extends Component {
           .get(
             SERVER_URL +
               "/users/unsubscribe?email=" +
-              this.state.email +
+              this.props.user.userData.data.email +
               "&password=" +
-              this.state.password
+              this.state.password +
+              "&token=" +
+              this.props.user.userData.data.token
           )
           .then(res => {
             if (res.data.status === "ok") {
-              alert("compte supprimer");
+              axios
+              .get(SERVER_URL + "/users/disconnect")
+              .then(res => { if (res.data.status === "ok") { 
+                alert("Compte supprimer"); 
+                this.props.history.replace("/signin")
+              } })
+
             }
+          })
+          .catch(function (error) {
+            console.log(error);
           });
+          ;
       }
       handleChangeEmail(e) {
         this.setState({ email: e.target.value });
@@ -52,16 +62,6 @@ class Unsubscribe extends Component {
           <div>
             <form onSubmit={this.handleSubmit}>
               Entrer votre mot de passe :
-              <div>
-                <label>
-                  E-mail :{" "}
-                  <input
-                    type="text"
-                    value={this.state.email}
-                    onChange={this.handleChangeEmail}
-                  />
-                </label>
-              </div>
               <div>
                 <label>
                   Mot de passe :{" "}
@@ -81,7 +81,6 @@ class Unsubscribe extends Component {
     }
 }
 
-/*
 function mapStateToProps (state) {
     return {
       user: state.userReducer
@@ -95,4 +94,4 @@ function mapStateToProps (state) {
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Unsubscribe)
-*/
+

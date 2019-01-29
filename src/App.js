@@ -52,7 +52,7 @@ class App extends Component {
           />
           />
           <Route path="/signup" component={Signup} />
-          <Route path="/unsubscribe" component={Unsubscribe} />
+          <PrivateRoute path="/unsubscribe" component={Unsubscribe} isConnected={this.state.isConnected}/>
           <PrivateRoute component={Game} isConnected={this.state.isConnected} />
           
         </Switch>
