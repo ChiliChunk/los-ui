@@ -24,8 +24,20 @@ class DeckMaker extends React.Component{
         let response = await axios.get('http://ling.westeurope.cloudapp.azure.com/cards/getAll')
         return response.data.data
     }
+
+    sendDeck(){
+        let devDeck = ["Jax" , "Ivern" , "Lux"] // change this variable devDeck by the real deck
+        let objectUrl = []
+        let requestUrl  = 'http://ling.westeurope.cloudapp.azure.com/match/initDeck?deck='
+        devDeck.map(champions=>{
+            objectUrl.push({key:champions})
+        })
+        requestUrl += JSON.stringify(objectUrl)
+        requestUrl += "&token="+this.props.userReducer.userData.data.token
+        console.log(requestUrl)
+        axios.get(requestUrl)
+    }
     render(){
-        console.log(this.state)
         return(
             <span className="deckMaker">
                 <div className="cardsPacked">
@@ -36,7 +48,7 @@ class DeckMaker extends React.Component{
                     })}
                 </div>
                 <div className="cardsPacked">
-                    <h3>Test</h3>
+                    <h3 onClick={()=>{this.sendDeck()}}>Test</h3>
                 </div>
             </span>
         )
