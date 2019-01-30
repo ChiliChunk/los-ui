@@ -37,9 +37,10 @@ class Unsubscribe extends Component {
           .then(res => {
             if (res.data.status === "ok") {
               axios
-              .get(SERVER_URL + "/users/disconnect")
+              .get(SERVER_URL + "/users/disconnect?token=" +
+              this.props.user.userData.data.token)
               .then(res => { if (res.data.status === "ok") { 
-                alert("Compte supprimer"); 
+                alert("Compte supprimé"); 
                 this.props.history.replace("/signin")
               } })
 

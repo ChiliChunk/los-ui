@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom'
 import MatchakingTab from "./components/MatchakingTab"
+import axios from "axios";
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as userActions from './actions/userActions'
+
+import { SERVER_URL } from "./consts";
 import "./style/home.css"
 
 class Home extends Component {
@@ -21,6 +27,18 @@ class Home extends Component {
         return ['Joueur1', 'GrosNoob', 'Joueur3']
     }
 
+    handleDisco(){
+        console.log(SERVER_URL + "/users/disconnect?token=" +
+        this.props.user.userData.data.token)
+        axios
+        .get(SERVER_URL + "/users/disconnect?token=" +
+                this.props.user.userData.data.token)
+            .then(res => {console.log(res); if(res.data.status === "ok") {
+                alert("Vous étes deconnecté")
+                this.props.history.replace("/signin")
+            } })
+    }
+
     render() {
         //To change we don't want to search all players even when not ready
         let players = this.getAllPlayersReady()
@@ -32,7 +50,7 @@ class Home extends Component {
         return (
             <div className="home">
                 <div className="header">
-                    <Button className="buttonDisconnect" variant="contained" color="default" >
+                    <Button className="buttonDisconnect" variant="contained" color="default" onClick={()=>this.handleDisco()}>
                         Deconnexion
                     </Button>
 
@@ -60,4 +78,17 @@ class Home extends Component {
         )
     }
 }
-export default Home;
+
+function mapStateToProps (state) {
+    return {
+      user: state.userReducer
+    }
+  }
+  
+  function mapDispatchToProps (dispatch) {
+    return {
+      userActions: bindActionCreators(userActions, dispatch),
+    }
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Home)
