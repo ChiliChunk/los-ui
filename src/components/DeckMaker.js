@@ -8,19 +8,23 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import Button from '@material-ui/core/Button';
+import { SERVER_URL } from "../consts";
 
-const champions = require('./champion.json')
+
 class DeckMaker extends React.Component {
     constructor(props) {
         super(props)
         this.addCard = this.addCard.bind(this)
-
-        let championsNotSelected = champions
+        let championsNotSelected = this.fetchCardData()
         this.state = {
             championsNotSelected: championsNotSelected,
             championsSelected: []
         }
+    }
 
+    async fetchCardData() {
+        let response = await axios.get(SERVER_URL + '/cards/getAll')
+        return response.data.data
     }
 
     addCard(index) {
@@ -32,25 +36,22 @@ class DeckMaker extends React.Component {
         }
     }
 
-    createDeck() {
-
-    }
-
     async componentDidMount() {
         const championsData = await this.fetchCardData()
         this.setState({ championsData: championsData })
     }
 
 
-    async fetchCardData() {
-        let response = await axios.get('http://localhost:3001/cards/getAll')
-        return response.data.data
-    }
 
     sendDeck() {
-        let devDeck = ["Jax", "Ivern", "Lux"] // change this variable devDeck by the real deck
+        let devDeck = []
+        {
+            (this.state.championsSelected || []).map((champions, index) => {
+                devDeck.push(champions.keyChamp)
+            })
+        }
         let objectUrl = []
-        let requestUrl = 'http://localhost:3001/match/initDeck?deck='
+        let requestUrl = SERVER_URL + '/match/initDeck?deck='
         devDeck.map(champions => {
             objectUrl.push({ key: champions })
         })
@@ -61,6 +62,7 @@ class DeckMaker extends React.Component {
             console.log(response)
         })
     }
+
     render() {
         return (
             <div className="deckMaker">
@@ -80,9 +82,6 @@ class DeckMaker extends React.Component {
                             <span key={index}> <PlayingCard name={champions.name} attack={champions.info.attack} armor={champions.info.defense} keyChamp={champions.key} /></span>
                         )
                     })}
-
-
-
                 </div>
                 <Button variant="contained" className="buttonValidate" onClick={() => this.createDeck()} disabled={this.state.championsSelected.length === 20 ? false : true} >
                     Valider
@@ -91,7 +90,6 @@ class DeckMaker extends React.Component {
         )
     }
 }
-
 
 function mapStateToProps(state) {
     return {
@@ -107,4 +105,3 @@ function mapDispatchToProps(dispatch) {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckMaker)
-
