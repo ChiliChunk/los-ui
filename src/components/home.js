@@ -1,19 +1,15 @@
 import React, { Component } from "react";
 import Button from '@material-ui/core/Button';
-<<<<<<< HEAD:src/components/home.js
-import MatchakingTab from "./MatchakingTab"
-import "../style/home.css"
-=======
+
 import { Link } from 'react-router-dom'
-import MatchakingTab from "./components/MatchakingTab"
+import MatchakingTab from "../components/MatchakingTab"
 import axios from "axios";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as userActions from './actions/userActions'
+import * as userActions from '../actions/userActions'
 
-import { SERVER_URL } from "./consts";
-import "./style/home.css"
->>>>>>> dev:src/home.js
+import { SERVER_URL } from "../consts";
+import "../style/home.css"
 
 class Home extends Component {
 

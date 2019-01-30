@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as userActions from './actions/userActions'
+import * as userActions from '../actions/userActions'
 
-import { SERVER_URL } from "./consts";
+import { SERVER_URL } from "../consts";
 
-import "./App.css";
+import "../style/App.css";
 
 
 class Unsubscribe extends Component {
