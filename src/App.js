@@ -8,8 +8,8 @@ import {
 
 import Signin from "./Signin";
 import Signup from "./Signup";
-import Game from "./Game";
-
+import Game from "./container/gameContainer";
+import Unsubscribe from "./Unsubscribe";
 import "./App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -52,7 +52,9 @@ class App extends Component {
           />
           />
           <Route path="/signup" component={Signup} />
+          <PrivateRoute path="/unsubscribe" component={Unsubscribe} isConnected={this.state.isConnected}/>
           <PrivateRoute component={Game} isConnected={this.state.isConnected} />
+          
         </Switch>
       </Router>
     );
