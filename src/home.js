@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Button from '@material-ui/core/Button';
-import logo from "./logo.svg";
+import { Link } from 'react-router-dom'
 import MatchakingTab from "./components/MatchakingTab"
 import "./style/home.css"
 
@@ -27,15 +27,16 @@ class Home extends Component {
         let textButton = this.state.isReady ? "Annuler" : "Prêt"
         //To change we need to change the color with the CSS instead
         let colorButton = this.state.isReady ? "secondary" : "primary"
+        const MyLink = props => <Link to="/unsubscribe" {...props} />
 
         return (
             <div className="home">
                 <div className="header">
-                    <Button className="buttonDisconnect" variant="contained" color="default">
+                    <Button className="buttonDisconnect" variant="contained" color="default" >
                         Deconnexion
                     </Button>
 
-                    <Button className="buttonDeleteAccount" variant="contained" color="default">
+                    <Button className="buttonDeleteAccount" variant="contained" color="default" component={MyLink}>
                         Supprimer le compte
                     </Button>
                 </div>
