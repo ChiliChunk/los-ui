@@ -1,11 +1,30 @@
 .deckMaker{
     display: flex;
     justify-content: center;
+    height: 100%;
+
 }
 
 
 .cardsPacked{
     display: flex;
-    width: 30%;
-    flex-wrap: wrap
+    justify-content: center;
+
+    width: 40%;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+/* Use h2 instead of title*/
+h2{
+    width: 100%;
+    padding-left: 35%;
+}
+
+.buttonValidate{
+    display: flex;
+    margin-top: 15% !important;
+   /* background-color:limegreen !important; */
+    height: 30%;
+
 }
