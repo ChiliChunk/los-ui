@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import * as userActions from './actions/userActions'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-
 
 import { SERVER_URL } from "./consts";
 
-import "./App.css";
+import "./style/App.css";
 
 class Signin extends Component {
   constructor(props) {
@@ -37,7 +33,6 @@ class Signin extends Component {
         if (res.data.status === "ok") {
           this.props.setSessionToken(res.data.token);
           this.props.history.push(process.env.PUBLIC_URL + "/");
-          this.props.userActions.setUserData(res.data)
         }
       });
   }
@@ -54,7 +49,8 @@ class Signin extends Component {
         <form onSubmit={this.handleSubmit}>
           Connectez-vous :
           <div>
-            <label onClick={() => { console.log(this.props) }}>
+
+            <label>
               Login :{" "}
               <input
                 type="text"
@@ -88,17 +84,4 @@ class Signin extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    userReducer: state.userReducer
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    userActions: bindActionCreators(userActions, dispatch),
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Signin)
+export default Signin;

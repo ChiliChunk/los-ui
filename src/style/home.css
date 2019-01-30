@@ -1,0 +1,29 @@
+
+.header{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttonDeleteAccount{
+
+    background-color:firebrick !important;
+}
+
+/* See if we can use something else than !important (material ui properties or flex)*/
+
+.buttonDisconnect{
+    margin-right: 2% !important;
+    background-color:tomato  !important;
+}
+
+.matchmaking{
+    margin-top: 5%;
+    display: flex;
+    justify-content:center;
+}
+
+.createDeck{
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+}
