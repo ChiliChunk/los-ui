@@ -21,21 +21,23 @@ class DeckMaker extends React.Component{
     }
 
     async fetchCardData(){
-        let response = await axios.get('http://ling.westeurope.cloudapp.azure.com/cards/getAll')
+        let response = await axios.get('http://localhost:3001/cards/getAll')
         return response.data.data
     }
 
     sendDeck(){
         let devDeck = ["Jax" , "Ivern" , "Lux"] // change this variable devDeck by the real deck
         let objectUrl = []
-        let requestUrl  = 'http://ling.westeurope.cloudapp.azure.com/match/initDeck?deck='
+        let requestUrl  = 'http://localhost:3001/match/initDeck?deck='
         devDeck.map(champions=>{
             objectUrl.push({key:champions})
         })
         requestUrl += JSON.stringify(objectUrl)
         requestUrl += "&token="+this.props.userReducer.userData.data.token
         console.log(requestUrl)
-        axios.get(requestUrl)
+        axios.get(requestUrl).then((response)=>{
+            console.log(response)
+        })
     }
     render(){
         return(
