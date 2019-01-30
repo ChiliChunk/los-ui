@@ -12,28 +12,56 @@ import * as userActions from './actions/userActions'
 class Home extends Component {
     constructor(props){
         super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.state = {
+            i : [],
+            matchmakingIds : []
+        }
     }
     handleSubmit(e) {
         e.preventDefault();
         axios
           .get( 
             SERVER_URL +
-              "/matchmaking/getAll"
+              "/matchmaking/participate?token="+this.props.userReducer.userData.data.token
           )
           .then(res => {
+            console.log(res)
+
+            //traiter le json et remplir le tableau
+        });
+        axios
+          .get( 
+            SERVER_URL +
+              "/matchmaking/getAll?token="+this.props.userReducer.userData.data.token
+          )
+
+          .then(res => {
+              let a
+              let i = []
+              let tab = []
+              for (a in res.data.data){
+                  console.log(res.data.data[a].name)
+                  i[a]=res.data.data[a].name
+                  tab[a]=res.data.data[a].matchmakingId
+                  console.log(res.data.data[a].matchmakingId)
+              }
+              tab=res.data.data
               console.log(res)
-              //traiter le json et remplir le tableau
+              console.log(i)
+              this.setState({i : i})
+              this.setState({matchmakingIds : tab})
           });
+          
       }
     render() {
-        console.log(this.props)
+        console.log(this.props.userReducer.userData)
         let players = ['Joueur1', 'GrosNoob', 'Joueur3']
 
         return (
 
             <div>
-                <MatchakingTab players={players} refs="TableauJoueurs"/>
+                <MatchakingTab players={this.state.i} id={this.state.matchmakingIds} refs="TableauJoueurs"/>
                 <Button variant="contained" color="secondary">
                     Deconnexion
                 </Button>
