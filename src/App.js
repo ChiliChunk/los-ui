@@ -6,13 +6,12 @@ import {
   Redirect
 } from "react-router-dom";
 
-import Signin from "./Signin";
-import Signup from "./Signup";
-import Game from "./components/Game";
-import Home from "./home";
-import DeckMaker from "./components/DeckMaker";
 
-import "./App.css";
+import Unsubscribe from "./components/Unsubscribe";
+import Signin from "./components/Signin";
+import Home from "./components/home"
+import Signup from "./components/Signup";
+import "./style/App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -54,7 +53,10 @@ class App extends Component {
           />
           />
           <Route path="/signup" component={Signup} />
+
+          <PrivateRoute path="/unsubscribe" component={Unsubscribe} isConnected={this.state.isConnected}/>
           <PrivateRoute component={Home} isConnected={this.state.isConnected} />
+
         </Switch>
       </Router>
     );
