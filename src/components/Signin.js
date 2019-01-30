@@ -4,6 +4,10 @@ import axios from "axios";
 import * as userActions from '../actions/userActions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import TextField from '@material-ui/core/TextField'
+import Paper from '@material-ui/core/Paper';
+import '../style/signin.css'
+import Button from '@material-ui/core/Button';
 
 
 import { SERVER_URL } from "../consts";
@@ -50,14 +54,19 @@ class Signin extends Component {
 
   render() {
     return (
+      <div className="testContainer">
+      <Paper elevation={2} className="formbox">
+      <img className="imgSignin" src={process.env.PUBLIC_URL + 'lol.png'} />
       <div>
         <form onSubmit={this.handleSubmit}>
-          Connectez-vous :
           <div>
             <label onClick={()=>{console.log(this.props)}}>
-              Login :{" "}
-              <input
-                type="text"
+              <TextField
+                id="outlined-with-placeholder"
+                label="Login"
+                placeholder="Login"
+                margin="normal"
+                variant="outlined"
                 value={this.state.email}
                 onChange={this.handleChangeEmail}
               />
@@ -65,24 +74,27 @@ class Signin extends Component {
           </div>
           <div>
             <label>
-              Mot de passe :{" "}
-              <input
+              <TextField
+                id="outlined-with-placeholder"
+                label="Mot de passe"
+                placeholder="Mot de passe"
+                margin="normal"
                 type="password"
+                variant="outlined"             
                 value={this.state.password}
                 onChange={this.handleChangePassword}
               />
             </label>
           </div>
-          <div>
-            <input type="submit" value="Se connecter" />
-          </div>
+          <Button variant="outlined" onClick={(e) => this.handleSubmit(e)}>
+            Se connecter
+          </Button>
+          <Button variant="outlined" secondary onClick={() => {this.props.history.push(process.env.PUBLIC_URL + "/signup");}}>
+              Créer un compte
+            </Button>
         </form>
-        <div>
-          {
-            "Vous n’avez pas de compte ? Créez votre compte en quelques secondes "
-          }
-          <Link to="/signup">en cliquant ici !</Link>
-        </div>
+      </div>
+      </Paper>
       </div>
     );
   }

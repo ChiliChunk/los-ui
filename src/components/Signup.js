@@ -3,6 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { SERVER_URL } from "../consts";
+import TextField from '@material-ui/core/TextField'
+import Paper from '@material-ui/core/Paper';
+import '../style/signin.css'
+import Button from '@material-ui/core/Button';
 
 class Signup extends Component {
   constructor(props) {
@@ -60,48 +64,66 @@ class Signup extends Component {
   }
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>{this.state.error}</div>
-          Inscrivez-vous :
-          <label>
-            Pseudo :{" "}
-            <input
-              type="text"
-              value={this.state.login}
-              onChange={this.handleChangeLogin}
-            />
-          </label>
-          <label>
-            Email :{" "}
-            <input
-              type="text"
-              value={this.state.email}
-              onChange={this.handleChangeEmail}
-            />
-          </label>
-          <label>
-            Mot de passe :{" "}
-            <input
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChangePassword}
-            />
-          </label>
-          <label>
-            Confirmation du mot de passe :{" "}
-            <input
-              type="password"
-              value={this.state.confirmPassword}
-              onChange={this.handleChangeConfirmPassword}
-            />
-          </label>
-          <input type="submit" value="S'inscrire" />
-        </form>
-        <div>
-          {"Vous avez déjà un compte ? "}
-          <Link to="/signin">Connectez-vous ici !</Link>
-        </div>
+      <div className="testContainer">
+        <Paper elevation={2} className="formbox">
+          <form onSubmit={this.handleSubmit}>
+            <div>{this.state.error}</div>
+            <div>
+
+              <TextField
+                id="outlined-with-placeholder"
+                label="Pseudo"
+                placeholder="Pseudo"
+                margin="normal"
+                variant="outlined"
+                value={this.state.login}
+                onChange={this.handleChangeLogin}
+              />
+            </div>
+            <div>
+
+            <TextField
+                id="outlined-with-placeholder"
+                label="email"
+                placeholder="email"
+                margin="normal"
+                variant="outlined"
+                value={this.state.email}
+                onChange={this.handleChangeEmail}
+              />
+            </div>
+            <div>
+              <TextField
+                id="outlined-with-placeholder"
+                label="Mot de passe"
+                placeholder="Mot de passe"
+                margin="normal"
+                variant="outlined"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleChangePassword}
+              />
+            </div>
+            <div>
+              <TextField
+                id="outlined-with-placeholder"
+                label="Confirmation du mot de passe"
+                placeholder="Mot de passe"
+                margin="normal"
+                variant="outlined"
+                type="password"
+                value={this.state.confirmPassword}
+                onChange={this.handleChangeConfirmPassword}/>
+            </div>
+              <Button variant="outlined" onClick={(e) => this.handleSubmit(e)}>
+                S'inscrire
+              </Button>
+          </form>
+          <div>
+            {"Vous avez déjà un compte ? "}
+            <Link to="/signin">Connectez-vous ici !</Link>
+          </div>
+        </Paper>
       </div>
     );
   }
