@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import Button from '@material-ui/core/Button';
-import logo from "./logo.svg";
-import MatchakingTab from "./components/MatchakingTab"
-import "./style/home.css"
+import MatchakingTab from "./MatchakingTab"
+import "../style/home.css"
 
 class Home extends Component {
 

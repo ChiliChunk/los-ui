@@ -6,10 +6,10 @@ import {
   Redirect
 } from "react-router-dom";
 
-import Signin from "./Signin";
-import Signup from "./Signup";
-import Game from "./container/gameContainer";
-import "./App.css";
+import Signin from "./components/Signin";
+import Home from "./components/home"
+import Signup from "./components/Signup";
+import "./style/App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route

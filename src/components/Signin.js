@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import * as userActions from './actions/userActions'
+import * as userActions from '../actions/userActions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 
-import { SERVER_URL } from "./consts";
+import { SERVER_URL } from "../consts";
 
-import "./App.css";
+import "../style/App.css";
 
 class Signin extends Component {
   constructor(props) {
