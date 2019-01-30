@@ -7,9 +7,8 @@ class Character extends React.Component{
     render(){
         return(
             <div>
-                <span className='ap'>AP</span>
                 <img src={tempURL} className='heroImg'/>
-                <span className='hp'>HP</span>
+                <span className={this.props.type === 'opponent' ? 'opponentHp' : 'selfHp'}>HP</span>
             </div>
         )
     }
