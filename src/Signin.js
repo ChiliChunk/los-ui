@@ -26,7 +26,7 @@ class Signin extends Component {
   handleSubmit(e) {
     e.preventDefault();
     axios
-      .get(
+      .get( 
         SERVER_URL +
           "/users/connect?email=" +
           this.state.email +
