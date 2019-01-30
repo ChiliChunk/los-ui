@@ -11,25 +11,25 @@ props : urlImage : string
         description : ?
 
 */
-class PlayingCard  extends React.Component{
-    renderFace(){
-        const {name,attack,armor} = this.props
-        return(
+class PlayingCard extends React.Component {
+    renderFace() {
+        const { name, attack, armor, keyChamp } = this.props
+        return (
             <Card className='card'>
                 <CardActionArea>
-                    <img 
-                        className="imgCard" 
-                        src="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
+                    <img
+                        className="imgCard"
+                        src={"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + keyChamp + "_0.jpg"}
                     />
                     <CardContent>
                         <span className="title">
                             {name}
                         </span>
-                        <br/>
+                        <br />
                         <span className="attack">
                             attack : {attack}
                         </span>
-                        <br/>
+                        <br />
                         <span className="armor">
                             armor : {armor}
                         </span>
@@ -39,28 +39,28 @@ class PlayingCard  extends React.Component{
         )
     }
 
-    renderBack(){
-        return(
+    renderBack() {
+        return (
             <Card className='card opponent'>
-                    <CardActionArea>
-                    <img 
-                        className="backCard" 
+                <CardActionArea>
+                    <img
+                        className="backCard"
                         src="https://i.imgur.com/fWxwxXD.png"
                     />
-                    </CardActionArea>
+                </CardActionArea>
             </Card>
         )
     }
-    
-    render(){
-        return(
+
+    render() {
+        return (
             <div>
                 {this.props.flipped ? this.renderBack() : this.renderFace()}
             </div>
         )
     }
 
-    
+
 }
 
 

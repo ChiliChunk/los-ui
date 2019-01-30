@@ -24,10 +24,10 @@ class Signin extends Component {
     axios
       .get(
         SERVER_URL +
-          "/users/connect?email=" +
-          this.state.email +
-          "&password=" +
-          this.state.password
+        "/users/connect?email=" +
+        this.state.email +
+        "&password=" +
+        this.state.password
       )
       .then(res => {
         if (res.data.status === "ok") {
@@ -49,6 +49,7 @@ class Signin extends Component {
         <form onSubmit={this.handleSubmit}>
           Connectez-vous :
           <div>
+
             <label>
               Login :{" "}
               <input

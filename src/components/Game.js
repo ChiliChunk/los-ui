@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import Character from './Character' 
-import Hand from './Hand' 
+import Character from './Character'
+import Hand from './Hand'
 import Board from './Board'
 import DeckMaker from './DeckMaker'
 import '../style/game.css'
@@ -10,6 +10,7 @@ class Game extends Component {
 
   render() {
     return (
+
       <div className='game'>
         <div className='panel'>
           <Character type={'opponent'} />
