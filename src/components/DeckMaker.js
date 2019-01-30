@@ -41,13 +41,27 @@ class DeckMaker extends React.Component {
         this.setState({ championsData: championsData })
     }
 
+
     async fetchCardData() {
-        let response = await axios.get('http://ling.westeurope.cloudapp.azure.com/cards/getAll')
+        let response = await axios.get('http://localhost:3001/cards/getAll')
         return response.data.data
     }
 
+    sendDeck() {
+        let devDeck = ["Jax", "Ivern", "Lux"] // change this variable devDeck by the real deck
+        let objectUrl = []
+        let requestUrl = 'http://localhost:3001/match/initDeck?deck='
+        devDeck.map(champions => {
+            objectUrl.push({ key: champions })
+        })
+        requestUrl += JSON.stringify(objectUrl)
+        requestUrl += "&token=" + this.props.userReducer.userData.data.token
+        console.log(requestUrl)
+        axios.get(requestUrl).then((response) => {
+            console.log(response)
+        })
+    }
     render() {
-
         return (
             <div className="deckMaker">
                 <div className="cardsPacked">
@@ -66,6 +80,8 @@ class DeckMaker extends React.Component {
                             <span key={index}> <PlayingCard name={champions.name} attack={champions.info.attack} armor={champions.info.defense} keyChamp={champions.key} /></span>
                         )
                     })}
+
+
 
                 </div>
                 <Button variant="contained" className="buttonValidate" onClick={() => this.createDeck()} disabled={this.state.championsSelected.length === 20 ? false : true} >
