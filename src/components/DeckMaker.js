@@ -36,6 +36,7 @@ class DeckMaker extends React.Component {
         }
     }
 
+
     async componentDidMount() {
         const championsData = await this.fetchCardData()
         this.setState({ championsData: championsData })
