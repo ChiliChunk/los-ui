@@ -6,6 +6,7 @@ import {
   Redirect
 } from "react-router-dom";
 
+
 import Unsubscribe from "./components/Unsubscribe";
 import Signin from "./components/Signin";
 import Home from "./components/home"
@@ -52,6 +53,7 @@ class App extends Component {
           />
           />
           <Route path="/signup" component={Signup} />
+
           <PrivateRoute path="/unsubscribe" component={Unsubscribe} isConnected={this.state.isConnected}/>
           <PrivateRoute component={Home} isConnected={this.state.isConnected} />
 

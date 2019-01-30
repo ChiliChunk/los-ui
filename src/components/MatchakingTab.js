@@ -18,6 +18,7 @@ class MatchakingTab extends React.Component {
     defyButton(idJoueur) {
         let ret
         ret =
+
             //Need to add an onClick function
             //Need to change the image icon to be able to use a .ico file instead of a hardcoded image
             <IconButton aria-label="Delete" >
