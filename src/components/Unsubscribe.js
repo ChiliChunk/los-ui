@@ -4,6 +4,11 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as userActions from '../actions/userActions'
 
+import TextField from '@material-ui/core/TextField'
+import Paper from '@material-ui/core/Paper';
+import '../style/signin.css'
+import Button from '@material-ui/core/Button';
+
 import { SERVER_URL } from "../consts";
 
 import "../style/App.css";
@@ -60,23 +65,28 @@ class Unsubscribe extends Component {
 
     render() {
         return (
-          <div>
+          <div className = "testContainer">
+            <Paper elevation={2} className="formbox">
             <form onSubmit={this.handleSubmit}>
-              Entrer votre mot de passe :
               <div>
-                <label>
-                  Mot de passe :{" "}
-                  <input
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.handleChangePassword}
-                  />
-                </label>
+                  <TextField
+                id="outlined-with-placeholder"
+                label="Mot de passe"
+                placeholder="Mot de passe"
+                type="password"
+                margin="normal"
+                variant="outlined"
+                value={this.state.password}
+                onChange={this.handleChangePassword}
+              />
               </div>
               <div>
-                <input type="submit" value="Supprimer son compte" />
+              <Button variant="outlined" onClick={(e) => this.handleSubmit(e)}>
+                Supprimer son compte
+              </Button>
               </div>
             </form>
+            </Paper>
           </div>
         );
     }
