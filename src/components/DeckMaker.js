@@ -84,7 +84,7 @@ class DeckMaker extends React.Component {
                         )
                     })}
                 </div>
-                <Button variant="contained" className="buttonValidate" onClick={() => this.createDeck()} disabled={this.state.championsSelected.length === 20 ? false : true} >
+                <Button variant="contained" className="buttonValidate" onClick={() => this.sendDeck()} disabled={this.state.championsSelected.length === 20 ? false : true} >
                     Valider
                 </Button>
             </div>
