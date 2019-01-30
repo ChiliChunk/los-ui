@@ -18,8 +18,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       return rest.isConnected ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/signin" />
-      );
+          <Redirect to="/signin" />
+        );
     }}
   />
 );
@@ -51,7 +51,7 @@ class App extends Component {
           />
           />
           <Route path="/signup" component={Signup} />
-          <PrivateRoute component={Game} isConnected={this.state.isConnected} />
+          <PrivateRoute component={Home} isConnected={this.state.isConnected} />
         </Switch>
       </Router>
     );
