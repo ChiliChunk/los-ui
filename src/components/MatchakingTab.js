@@ -22,9 +22,16 @@ class MatchakingTab extends React.Component {
         this.state = {
             requests : []
         }
+        this.interval = setInterval(
+            () => this.refresh(),3000
+        )
     }
 
-    handleSubmit(e,index) {
+    componentWillUnmount(){
+        clearInterval(this.interval)
+    }
+
+    requestAPlayer(e,index) {
         console.log(e,index)
         console.log(this.props.matchmakingIds)
         e.preventDefault();
@@ -49,6 +56,20 @@ class MatchakingTab extends React.Component {
         return ret
     }
 
+    acceptRequest(index){ // /!\ ATTENTION : check if we accept the request of the good player
+        console.log(this.state.requests)
+        console.log(this.state.requests[index].matchmakingId)
+        axios
+        .get( 
+          SERVER_URL +
+            "/matchmaking/acceptRequest?matchmakingId="+this.state.requests[index].matchmakingId+"&token="+this.props.userReducer.userData.data.token
+        ).then(res => {
+            console.log("ACCEPT REQUEST")
+            console.log(res)
+            this.props.storeMatchData(res.data.data , false)
+        });
+    }
+
     allPlayers() {
         if (this.props.type === "availablePlayers"){
             let ret = [];
@@ -58,7 +79,7 @@ class MatchakingTab extends React.Component {
                 ret.push(
                     <TableRow key={index}>
                         <TableCell>{player}</TableCell>
-                        <TableCell onClick={(e) => this.handleSubmit(e,index)}>{defyButton} </TableCell>
+                        <TableCell onClick={(e) => this.requestAPlayer(e,index)}>{defyButton} </TableCell>
                     </TableRow>
                     )
                 })
@@ -74,7 +95,7 @@ class MatchakingTab extends React.Component {
                 ret.push(
                     <TableRow key={cpt}>
                         <TableCell>{player.name}</TableCell>
-                        <TableCell onClick={(e) => this.handleSubmit(e,index)}>Defier  {defyButton} </TableCell>
+                        <TableCell onClick={() => this.acceptRequest(index)}>{defyButton} </TableCell>
                     </TableRow>
                     )
                 })
@@ -111,11 +132,11 @@ class MatchakingTab extends React.Component {
                         </TableBody>
                     </Table>
                 </Paper>
-                {this.props.type === "challengeRequests" ?
+                {/* {this.props.type === "challengeRequests" ?
                     <Fab color="primary" aria-label="Add" onClick={() => this.refresh()}>
                         <RefreshIcon />
                     </Fab> : null
-                }
+                } */}
             </div>
             
         )

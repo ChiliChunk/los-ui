@@ -16,10 +16,45 @@ class Home extends Component {
         super(props)
         this.state = {
             isReady: false,
-            requests : []
+            requests : [],
+            matchFound : false
         }
+        this.interval = setInterval(
+            () =>this.participate(), 3000);
     }
 
+    componentWillUnmount(){
+        clearInterval(this.interval)
+    }
+
+    storeMatchData(match , isJoueur1){
+        console.log('MATCH FOUND')
+        this.setState({
+            matchFound : true,
+            player1 : {name : match.player1.name, id:match.player1.id},
+            player2 : {name : match.player2.name, id:match.player2.id},
+            isJoueur1 : isJoueur1
+        })
+
+    }
+    participate(){
+        console.log('call to participate')
+        if (this.props.userReducer.userData.data){
+            axios
+                .get( 
+                SERVER_URL +
+                    "/matchmaking/participate?token="+this.props.userReducer.userData.data.token
+                )
+                .then(res => {
+                this.setState({
+                    requests : res.data.data.request,
+                })
+                if(res.data.data.match !== undefined && res.data.data.match !== null){ //connected player send the request
+                   this.storeMatchData(res.data.data.match , true)
+                }
+            });
+        }
+    }
     switchReady() {
         this.setState({ isReady: !this.state.isReady })
         axios
@@ -28,10 +63,12 @@ class Home extends Component {
                 "/matchmaking/participate?token="+this.props.userReducer.userData.data.token
             )
             .then(res => {
-            console.log(res)
             this.setState({
-                requests : res.data.data.request
+                requests : res.data.data.request,
             })
+            if(res.data.data.match !== undefined && res.data.data.match !== null){ //connected player send the request
+               this.storeMatchData(res.data.data.match)
+            }
         });
         axios
             .get( 
@@ -90,7 +127,7 @@ class Home extends Component {
                         Supprimer le compte
                     </Button>
                 </div>
-
+                <h3>Bienvenue {this.props.userReducer.userData.data && this.props.userReducer.userData.data.name}</h3>
                 <div className="matchmaking">
                     {this.state.isReady ? <MatchakingTab
                                             type = "availablePlayers"
@@ -103,6 +140,7 @@ class Home extends Component {
                                             key={2}
                                             type = "challengeRequests"
                                             players={(this.state.requests || [])}
+                                            storeMatchData = {this.storeMatchData}
                                             matchmakingIds = {this.state.matchmakingIds}
                                             title = "Joueurs voulant vous defier"/> : null}
                     
