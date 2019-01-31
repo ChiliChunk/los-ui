@@ -6,16 +6,17 @@ import axios from "axios";
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as userActions from '../actions/userActions'
-import DeckMaker from './DeckMaker'
 import { SERVER_URL } from "../consts";
 import "../style/home.css"
+import MatchakingTab from './MatchakingTab'
 
 class Home extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            isReady: false
+            isReady: false,
+            requests : []
         }
     }
 
@@ -57,10 +58,6 @@ class Home extends Component {
               
     }
 
-    getAllPlayersReady() {
-        return ['Joueur1', 'GrosNoob', 'Joueur3']
-    }
-
     handleDisco() {
         console.log(SERVER_URL + "/users/disconnect?token=" +
             this.props.user.userData.data.token)
@@ -74,6 +71,7 @@ class Home extends Component {
                 }
             })
     }
+
 
     render() {
         let textButton = this.state.isReady ? "Annuler" : "Prêt"
@@ -95,15 +93,24 @@ class Home extends Component {
 
                 <div className="matchmaking">
                     {this.state.isReady ? <MatchakingTab
+                                            type = "availablePlayers"
+                                            key={1}
                                             players={this.state.allReadyPlayers}
+                                            matchmakingIds = {this.state.matchmakingIds}
                                             title = "Joueurs a défier"/> : null}
+                    
                     {this.state.isReady ? <MatchakingTab
-                                            players={this.state.requests}
+                                            key={2}
+                                            type = "challengeRequests"
+                                            players={(this.state.requests || [])}
+                                            matchmakingIds = {this.state.matchmakingIds}
                                             title = "Joueurs voulant vous defier"/> : null}
-
-                    <Button className="buttonReady" variant="contained" onClick={this.switchReady.bind(this)} ready={this.state.isReady}>
+                    
+                    <Button className="buttonReady" variant="contained" onClick={this.switchReady.bind(this)}>
                         {textButton}
                     </Button>
+                    <br/>
+
 
 
                 </div>
