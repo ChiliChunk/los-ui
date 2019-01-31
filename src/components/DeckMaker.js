@@ -15,15 +15,15 @@ class DeckMaker extends React.Component {
     constructor(props) {
         super(props)
         this.addCard = this.addCard.bind(this)
-        let championsNotSelected = this.fetchCardData()
         this.state = {
-            championsNotSelected: championsNotSelected,
+            championsNotSelected: [],
             championsSelected: []
         }
     }
 
     async fetchCardData() {
         let response = await axios.get(SERVER_URL + '/cards/getAll')
+        console.log(typeof response.data.data)
         return response.data.data
     }
 
@@ -36,21 +36,25 @@ class DeckMaker extends React.Component {
         }
     }
 
+    removeCard(index) {
+        let champion = this.state.championsSelected.splice(index, 1)[0]
+        let temp = this.state.championsNotSelected
+        temp.push(champion)
+        this.setState({ championsNotSelected: temp })
+    }
 
     async componentDidMount() {
         const championsData = await this.fetchCardData()
-        this.setState({ championsData: championsData })
+        this.setState({ championsNotSelected: championsData })
     }
 
 
 
     sendDeck() {
         let devDeck = []
-        {
             (this.state.championsSelected || []).map((champions, index) => {
                 devDeck.push(champions.keyChamp)
             })
-        }
         let objectUrl = []
         let requestUrl = SERVER_URL + '/match/initDeck?deck='
         devDeck.map(champions => {
@@ -65,11 +69,13 @@ class DeckMaker extends React.Component {
     }
 
     render() {
+        const { championsNotSelected, championsSelected } = this.state
+        console.log(this.state)
         return (
             <div className="deckMaker">
                 <div className="cardsPacked">
                     <h2 className="title"> Toutes les cartes</h2>
-                    {(this.state.championsNotSelected || []).map((champions, index) => {
+                    {(championsNotSelected).map((champions, index) => {
                         return (
                             <span key={index} onClick={() => this.addCard(index)}><PlayingCard name={champions.name} attack={champions.info.attack} armor={champions.info.defense} keyChamp={champions.key} /></span>
                         )
@@ -78,13 +84,13 @@ class DeckMaker extends React.Component {
 
                 <div className="cardsPacked">
                     <h2 className="title"> Mon deck</h2>
-                    {(this.state.championsSelected || []).map((champions, index) => {
+                    {(championsSelected).map((champions, index) => {
                         return (
-                            <span key={index}> <PlayingCard name={champions.name} attack={champions.info.attack} armor={champions.info.defense} keyChamp={champions.key} /></span>
+                            <span key={index} onClick={() => this.removeCard(index)} > <PlayingCard name={champions.name} attack={champions.info.attack} armor={champions.info.defense} keyChamp={champions.key} /></span>
                         )
                     })}
                 </div>
-                <Button variant="contained" className="buttonValidate" onClick={() => this.createDeck()} disabled={this.state.championsSelected.length === 20 ? false : true} >
+                <Button variant="contained" className="buttonValidate" onClick={() => this.sendDeck()} disabled={championsSelected.length === 20 ? false : true} >
                     Valider
                 </Button>
             </div>
