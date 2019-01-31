@@ -9,6 +9,8 @@ import * as userActions from '../actions/userActions'
 import { SERVER_URL } from "../consts";
 import "../style/home.css"
 import MatchakingTab from './MatchakingTab'
+import Game from './Game'
+import DeckMaker from "./DeckMaker";
 
 class Home extends Component {
 
@@ -17,25 +19,23 @@ class Home extends Component {
         this.state = {
             isReady: false,
             requests : [],
-            matchFound : false
+            matchFound : false,
+            showDeckMaker : false
         }
         this.interval = setInterval(
             () =>this.participate(), 3000);
     }
 
-    componentWillUnmount(){
-        clearInterval(this.interval)
-    }
-
     storeMatchData(match , isJoueur1){
         console.log('MATCH FOUND')
+        clearInterval(this.interval)
         this.setState({
             matchFound : true,
             player1 : {name : match.player1.name, id:match.player1.id},
             player2 : {name : match.player2.name, id:match.player2.id},
             isJoueur1 : isJoueur1
         })
-
+        // send init deck avec le deck du  reducer
     }
     participate(){
         console.log('call to participate')
@@ -81,14 +81,10 @@ class Home extends Component {
                 let allReadyPlayers = []
                 let tab = []
                 for (a in res.data.data){
-                    console.log(res.data.data[a].name)
                     allReadyPlayers[a]=res.data.data[a].name
                     tab[a]=res.data.data[a].matchmakingId
-                    console.log(res.data.data[a].matchmakingId)
                 }
                 tab=res.data.data
-                console.log(res)
-                console.log(allReadyPlayers)
                 this.setState({allReadyPlayers : allReadyPlayers,
                     matchmakingIds : tab })
             });
@@ -96,8 +92,6 @@ class Home extends Component {
     }
 
     handleDisco() {
-        console.log(SERVER_URL + "/users/disconnect?token=" +
-            this.props.user.userData.data.token)
         axios
             .get(SERVER_URL + "/users/disconnect?token=" +
                 this.props.user.userData.data.token)
@@ -109,8 +103,23 @@ class Home extends Component {
             })
     }
 
+    closeDeckMaker(){
+        console.log("close deck")
+        this.setState({showDeckMaker : false})
+    }
 
     render() {
+        if (this.state.showDeckMaker){
+            return (
+                <DeckMaker
+                closeDeckMaker = {this.closeDeckMaker.bind(this)}/>
+            )
+        }
+        if (this.state.matchFound){
+            return(
+                <Game />
+            )
+        }
         let textButton = this.state.isReady ? "Annuler" : "Prêt"
         //To change we need to change the color with the CSS instead
         let colorButton = this.state.isReady ? "secondary" : "primary"
@@ -154,7 +163,7 @@ class Home extends Component {
                 </div>
 
                 <div className="createDeck">
-                    <Button variant="contained" >
+                    <Button variant="contained" onClick={() =>{this.setState({showDeckMaker : true})}}>
                         Modifier Deck
                     </Button>
                 </div>

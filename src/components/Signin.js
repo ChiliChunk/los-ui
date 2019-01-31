@@ -60,7 +60,7 @@ class Signin extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <label onClick={()=>{console.log(this.props)}}>
+            <label>
               <TextField
                 id="outlined-with-placeholder"
                 label="Login"

@@ -23,7 +23,6 @@ class DeckMaker extends React.Component {
 
     async fetchCardData() {
         let response = await axios.get(SERVER_URL + '/cards/getAll')
-        console.log(typeof response.data.data)
         return response.data.data
     }
 
@@ -51,26 +50,26 @@ class DeckMaker extends React.Component {
 
 
     sendDeck() {
-        let devDeck = []
-            (this.state.championsSelected || []).map((champions, index) => {
-                devDeck.push(champions.keyChamp)
-            })
-        let objectUrl = []
-        let requestUrl = SERVER_URL + '/match/initDeck?deck='
-        devDeck.map(champions => {
-            objectUrl.push({ key: champions })
+        let finalDeck = [];
+        (this.state.championsSelected || []).map((champions, index) => {
+            finalDeck.push({key:champions.key})
         })
-        requestUrl += JSON.stringify(objectUrl)
-        requestUrl += "&token=" + this.props.userReducer.userData.data.token
-        console.log(requestUrl)
-        axios.get(requestUrl).then((response) => {
-            console.log(response)
-        })
+
+        this.props.closeDeckMaker()
+        this.props.userActions.storeDeck(finalDeck)
+        console.log(finalDeck)
+        // let requestUrl = SERVER_URL + '/match/initDeck?deck='
+        // requestUrl += JSON.stringify(objectUrl)
+        // requestUrl += "&token=" + this.props.userReducer.userData.data.token
+        // console.log(requestUrl)
+        // axios.get(requestUrl).then((response) => {
+        //     console.log(response)
+        // })
+
     }
 
     render() {
         const { championsNotSelected, championsSelected } = this.state
-        console.log(this.state)
         return (
             <div className="deckMaker">
                 <div className="cardsPacked">

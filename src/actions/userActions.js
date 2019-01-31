@@ -6,3 +6,10 @@ return {
     data
 }
 }
+
+export function storeDeck (deck){
+    return{
+        type : 'STORE_DECK',
+        deck
+    }
+}

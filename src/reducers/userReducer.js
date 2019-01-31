@@ -2,7 +2,8 @@ import { bindActionCreators } from "redux";
 
 const initialState = {
     userData : [],
-    allChampionsData : []
+    allChampionsData : [],
+    deck : []
 }
 
 export default (state = initialState, action) => {
@@ -19,6 +20,11 @@ export default (state = initialState, action) => {
         allChampionsData : action.allChampionsData
       }
 
+      case 'STORE_DECK':
+      return{
+        ...state,
+        deck : action.deck
+      }
      default:
       return state
     }
