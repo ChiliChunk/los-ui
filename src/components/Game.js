@@ -17,6 +17,10 @@ class Game extends Component {
     this.getMatch()
     this.initDeck()
     this.getMatch()
+    this.state = {
+      selfData : {},
+      opponentsData : {}
+    }
   }
 
   async initDeck(){
@@ -34,45 +38,55 @@ class Game extends Component {
     await axios.get(SERVER_URL + '/match/getMatch?token=' + this.props.userReducer.userData.data.token).then(reponse=>{
       console.log('getMatch')
       console.log(reponse)
-      this.setState({matchData : reponse.data})
+      if (this.props.userReducer.isPlayerOne){
+        this.setState({selfData : reponse.data.data.player1,
+                      opponentsData : reponse.data.data.player2,
+                      })
+
+      }
+      else{
+        this.setState({selfData : reponse.data.data.player2,
+                      opponentsData : reponse.data.data.player1,
+          })
+      }
   })
   }
+
   render() {
+    const {selfData , opponentsData} = this.state
     return (
 
       <div className='game'>
         <div className='panel'>
-          <Character type={'opponent'} />
+          <Character 
+            hp = {opponentsData.hp || '?'}
+            ap = {'?'} 
+            nbCarteDeck = {opponentsData.deck || '?'}
+            name = {opponentsData.name || '?'}/>
           <Hand 
           type={'opponent'}
-          cards ={[{name:'test1',
-                    attack : 12,
-                    armor : 15}]}/>
+          cards ={opponentsData.hand}/>
         </div>
         <div className='board' style={{marginBottom:'7px'}}>
           <Board
           type={'opponent'}
-          cards ={[{name:'test2',
-                    attack : 12,
-                    armor : 15}]}/>
+          cards ={[]}/>
         </div>
         <div className='board' style={{marginTop:'7px'}}>
           <Board 
           type={'self'}
-          cards ={[{name:'test1',
-                    attack : 12,
-                    armor : 15},
-                    {name:'test11',
-                    attack : 12,
-                    armor : 15}]}/>
+          cards ={[]}/>
         </div>
         <div className='panel'>
-          <Character type={'self'}/>
+          <Character 
+            hp={selfData.hp || '?'}
+            ap = {'?'}
+            nbCarteDeck = {selfData.deck || '?'}
+            name = {selfData.name || '?'}
+            />
           <Hand 
           type={'self'}
-          cards ={[{name:'test1',
-                    attack : 12,
-                    armor : 15}]}/>
+          cards ={[]}/>
         </div>
       </div>
     );

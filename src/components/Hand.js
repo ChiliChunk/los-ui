@@ -5,19 +5,35 @@ class Hand extends React.Component{
 
     render(){
         const {type , cards} = this.props
-        return(
+        if (type === 'self'){
+            return(
+                <div className='hand'>
+                    {cards.map((card , index)=>{
+                    return(
+                        <PlayingCard
+                            key={index}
+                            name={card.name}
+                            attack={card.attack}
+                            armor={card.armor}
+                            flipped = {false}/>
+                    )
+                    })}
+                </div>
+            )
+        }
+        else{
+            return(
             <div className='hand'>
-                {cards.map((card , index)=>{
-                return(
-                    <PlayingCard
-                        key={index}
-                        name={card.name}
-                        attack={card.attack}
-                        armor={card.armor}/>
-                )
-                })}
-            </div>
-        )
+                    {[...Array(cards).keys()].map(elmt=>{ // 
+                    return(
+                        <PlayingCard
+                            flipped= {true}
+                        />
+                    )
+                    })}
+                </div>
+            )
+        }
     }
 }
 export default Hand

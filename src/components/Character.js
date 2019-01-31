@@ -7,9 +7,11 @@ class Character extends React.Component{
     render(){
         return(
             <div>
-                <span className='ap'>AP</span>
+                <span className='ap'>{this.props.ap && this.props.ap}/3</span>
                 <img src={tempURL} className='heroImg'/>
-                <span className='hp'>HP</span>
+                <span className='hp'>{this.props.hp && this.props.hp}</span>
+                <span className ='nbCarteDeck'>{this.props.nbCarteDeck}/20</span>
+                <span className = 'playerName'>{this.props.name}</span>
             </div>
         )
     }
