@@ -1,0 +1,28 @@
+.media {
+    height: 20;
+  }
+
+.card {
+    width: 150px !important;
+    border-radius: 30px !important;
+    height: 100% !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    text-align: center !important;
+
+}
+.imgCard{
+    width: 100%;
+    height: 100%;
+}
+
+.title {
+    font-size: 1.3em;
+}
+
+.backCard{
+    height: -moz-available;          /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    height: fill-available;
+    width: inherit;
+}

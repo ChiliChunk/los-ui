@@ -1,18 +1,23 @@
 import React from 'react'
 import '../style/board.css'
+import Card from './PlayingCard'
+import PlayingCard from './PlayingCard';
 class Board extends React.Component{
     render(){
-        const {type} = this.props
-        if (type==='opponent'){
-            return (
-                <p>opponent Board</p>                
-            )
-        }
-        else{
-            return (
-                <p>my Board</p>                
-            ) 
-        }
+        const {type , cards} = this.props
+        return(
+            <React.Fragment>
+                {cards.map((card , item)=>{
+                return(
+                    <PlayingCard
+                        name={card.name}
+                        attack={card.attack}
+                        armor={card.armor}/>
+                )
+                })}
+            </React.Fragment>
+        )
+    
     }
 }
 

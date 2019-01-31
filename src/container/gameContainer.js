@@ -6,7 +6,8 @@ import * as gameActions from '../actions/gameActions'
 
 function mapStateToProps (state) {
   return {
-    store: state.gameReducer
+    store: state.gameReducer,
+    user: state.userReducer
   }
 }
 
