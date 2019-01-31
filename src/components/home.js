@@ -22,23 +22,17 @@ class Home extends Component {
             matchFound : false,
             showDeckMaker : false
         }
-        this.interval = setInterval(
-            () =>this.participate(), 3000);
     }
 
-    storeMatchData(match , isJoueur1){
+
+    async storeMatchData(match , isJoueur1){
         console.log('MATCH FOUND')
-        clearInterval(this.interval)
-        this.setState({
-            matchFound : true,
-            player1 : {name : match.player1.name, id:match.player1.id},
-            player2 : {name : match.player2.name, id:match.player2.id},
-            isJoueur1 : isJoueur1
-        })
-        // send init deck avec le deck du  reducer
+        await this.props.userActions.storeIsJoueurOne(isJoueur1) // to know in the game if we are player one or not
+        this.props.history.push(process.env.PUBLIC_URL + "/game")
     }
     participate(){
         console.log('call to participate')
+        console.log(this.state)
         if (this.props.userReducer.userData.data){
             axios
                 .get( 
@@ -55,8 +49,14 @@ class Home extends Component {
             });
         }
     }
+
+    componentWillUnmount(){
+        console.log('UNMOUNT')
+    }
+
     switchReady() {
-        this.setState({ isReady: !this.state.isReady })
+        this.setState({ isReady: !this.state.isReady })           
+        
         axios
             .get( 
             SERVER_URL +
@@ -153,7 +153,7 @@ class Home extends Component {
                                             matchmakingIds = {this.state.matchmakingIds}
                                             title = "Joueurs voulant vous defier"/> : null}
                     
-                    <Button className="buttonReady" variant="contained" onClick={this.switchReady.bind(this)}>
+                    <Button className="buttonReady" variant="contained" disabled={this.props.userReducer && this.props.userReducer.deck.length === 0 ? true : false} onClick={this.switchReady.bind(this)}>
                         {textButton}
                     </Button>
                     <br/>
@@ -164,7 +164,7 @@ class Home extends Component {
 
                 <div className="createDeck">
                     <Button variant="contained" onClick={() =>{this.setState({showDeckMaker : true})}}>
-                        Modifier Deck
+                        Créer Deck
                     </Button>
                 </div>
             </div>

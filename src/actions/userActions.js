@@ -13,3 +13,10 @@ export function storeDeck (deck){
         deck
     }
 }
+
+export function storeIsJoueurOne (isPlayerOne){
+    return{
+        type : 'STORE_IS_PLAYER_ONE',
+        isPlayerOne
+    }
+}

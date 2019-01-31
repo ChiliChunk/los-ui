@@ -7,9 +7,10 @@ class Hand extends React.Component{
         const {type , cards} = this.props
         return(
             <div className='hand'>
-                {cards.map((card , item)=>{
+                {cards.map((card , index)=>{
                 return(
                     <PlayingCard
+                        key={index}
                         name={card.name}
                         attack={card.attack}
                         armor={card.armor}/>

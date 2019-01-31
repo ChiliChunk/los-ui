@@ -58,13 +58,7 @@ class DeckMaker extends React.Component {
         this.props.closeDeckMaker()
         this.props.userActions.storeDeck(finalDeck)
         console.log(finalDeck)
-        // let requestUrl = SERVER_URL + '/match/initDeck?deck='
-        // requestUrl += JSON.stringify(objectUrl)
-        // requestUrl += "&token=" + this.props.userReducer.userData.data.token
-        // console.log(requestUrl)
-        // axios.get(requestUrl).then((response) => {
-        //     console.log(response)
-        // })
+ 
 
     }
 

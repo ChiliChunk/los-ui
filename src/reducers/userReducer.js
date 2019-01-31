@@ -3,7 +3,8 @@ import { bindActionCreators } from "redux";
 const initialState = {
     userData : [],
     allChampionsData : [],
-    deck : []
+    deck : [],
+    isPlayerOne : null
 }
 
 export default (state = initialState, action) => {
@@ -24,6 +25,12 @@ export default (state = initialState, action) => {
       return{
         ...state,
         deck : action.deck
+      }
+
+      case 'STORE_IS_PLAYER_ONE':
+      return{
+        ...state,
+        isPlayerOne : action.isPlayerOne
       }
      default:
       return state
