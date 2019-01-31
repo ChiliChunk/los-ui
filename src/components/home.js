@@ -22,6 +22,40 @@ class Home extends Component {
 
     switchReady() {
         this.setState({ isReady: !this.state.isReady })
+        axios
+            .get( 
+            SERVER_URL +
+                "/matchmaking/participate?token="+this.props.userReducer.userData.data.token
+            )
+            .then(res => {
+            console.log(res)
+            this.setState({
+                requests : res.data.data.request
+            })
+        });
+        axios
+            .get( 
+            SERVER_URL +
+                "/matchmaking/getAll?token="+this.props.userReducer.userData.data.token
+            )
+
+            .then(res => {
+                let a
+                let allReadyPlayers = []
+                let tab = []
+                for (a in res.data.data){
+                    console.log(res.data.data[a].name)
+                    allReadyPlayers[a]=res.data.data[a].name
+                    tab[a]=res.data.data[a].matchmakingId
+                    console.log(res.data.data[a].matchmakingId)
+                }
+                tab=res.data.data
+                console.log(res)
+                console.log(allReadyPlayers)
+                this.setState({allReadyPlayers : allReadyPlayers,
+                    matchmakingIds : tab })
+            });
+              
     }
 
     getAllPlayersReady() {
@@ -41,8 +75,6 @@ class Home extends Component {
     }
 
     render() {
-        //To change we don't want to search all players even when not ready
-        let players = this.getAllPlayersReady()
         let textButton = this.state.isReady ? "Annuler" : "Prêt"
         //To change we need to change the color with the CSS instead
         let colorButton = this.state.isReady ? "secondary" : "primary"
@@ -61,7 +93,12 @@ class Home extends Component {
                 </div>
 
                 <div className="matchmaking">
-                    {this.state.isReady ? <MatchakingTab players={players} /> : null}
+                    {this.state.isReady ? <MatchakingTab
+                                            players={this.state.allReadyPlayers}
+                                            title = "Joueurs a défier"/> : null}
+                    {this.state.isReady ? <MatchakingTab
+                                            players={this.state.requests}
+                                            title = "Joueurs voulant vous defier"/> : null}
 
                     <Button className="buttonReady" variant="contained" onClick={this.switchReady.bind(this)} ready={this.state.isReady}>
                         {textButton}
@@ -82,7 +119,7 @@ class Home extends Component {
 
 function mapStateToProps (state) {
     return {
-      user: state.userReducer
+      userReducer: state.userReducer
     }
   }
   

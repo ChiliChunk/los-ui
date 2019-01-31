@@ -30,11 +30,12 @@ class MatchakingTab extends React.Component {
     }
 
     allPlayers() {
-        let ret = []
-        this.props.players.map((player, index) => {
-            let defyButton = this.defyButton(player)
+        let ret = [];
+        console.log(this.props.players);
+        (this.props.players || []).map((player, index) => {
+            let defyButton = this.defyButton((player,index))
             ret.push(
-                <TableRow>
+                <TableRow key={index}>
                     <TableCell>{player}</TableCell>
                     <TableCell>Defier  {defyButton} </TableCell>
                 </TableRow>)
@@ -48,7 +49,7 @@ class MatchakingTab extends React.Component {
                 <Table>
                     <TableHead>
                         <TableCell>
-                            Joueur
+                            {this.props.title}
                     </TableCell>
                     </TableHead>
                     <TableBody>
