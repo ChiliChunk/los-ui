@@ -15,7 +15,7 @@ class PlayingCard extends React.Component {
     renderFace() {
         const { name, attack, armor, keyChamp } = this.props
         return (
-            <Card className='card'>
+            <Card className='card' raised>
                 <CardActionArea>
                     <img
                         className="imgCard"

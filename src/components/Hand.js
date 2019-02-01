@@ -10,12 +10,15 @@ class Hand extends React.Component{
                 <div className='hand'>
                     {cards.map((card , index)=>{
                     return(
+                    <span onClick={() => this.props.onCardClick(index)}>
                         <PlayingCard
                             key={index}
+                            keyChamp = {card.keyChamp}
                             name={card.name}
                             attack={card.attack}
                             armor={card.armor}
                             flipped = {false}/>
+                    </span>
                     )
                     })}
                 </div>
@@ -24,9 +27,10 @@ class Hand extends React.Component{
         else{
             return(
             <div className='hand'>
-                    {[...Array(cards).keys()].map(elmt=>{ // 
+                    {[...Array(cards).keys()].map(index=>{ // in range js style
                     return(
                         <PlayingCard
+                            key = {index}
                             flipped= {true}
                         />
                     )

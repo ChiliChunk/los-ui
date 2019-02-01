@@ -9,11 +9,14 @@ import { SERVER_URL } from "../consts";
 import * as userActions from '../actions/userActions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import PlayingCard from "./PlayingCard";
+import '../consts'
 
 class Game extends Component {
   
   constructor(props){
     super(props)
+    this.playACard = this.playACard.bind(this)
     this.getMatch()
     this.initDeck()
     this.getMatch()
@@ -27,22 +30,16 @@ class Game extends Component {
     let requestUrl = SERVER_URL + '/match/initDeck?deck='
     requestUrl += JSON.stringify(this.props.userReducer.deck)
     requestUrl += "&token=" + this.props.userReducer.userData.data.token
-    console.log(requestUrl)
     await axios.get(requestUrl).then((response) => {
-        console.log('init deck')
-        console.log(response)
     })
   }
 
   async getMatch(){
     await axios.get(SERVER_URL + '/match/getMatch?token=' + this.props.userReducer.userData.data.token).then(reponse=>{
-      console.log('getMatch')
-      console.log(reponse)
       if (this.props.userReducer.isPlayerOne){
         this.setState({selfData : reponse.data.data.player1,
-                      opponentsData : reponse.data.data.player2,
+                      opponentsData : reponse.data.data.player2
                       })
-
       }
       else{
         this.setState({selfData : reponse.data.data.player2,
@@ -51,6 +48,29 @@ class Game extends Component {
       }
   })
   }
+
+  transfromHand(hand){
+    let result = []
+    if (hand !== undefined){
+      hand.map(champ =>{
+        let roundedAttack = Math.round(champ.stats.attackdamage)
+        let roundedArmor = Math.round(champ.stats.armor)
+        result.push({keyChamp : champ.key , name : champ.name , attack : roundedAttack , armor : roundedArmor})
+      })
+    }
+    return result
+  }
+
+  async playACard(index){
+    const {hand} = this.state.selfData
+    // if (this.state.selfData.turn){
+      await axios.get(
+        SERVER_URL + 'match/playcard?card=' + hand[index].key + '&token=' + this.props.userReducer.userData.data.token
+      )
+      this.getMatch()
+    // }
+  }
+
 
   render() {
     const {selfData , opponentsData} = this.state
@@ -85,8 +105,9 @@ class Game extends Component {
             name = {selfData.name || '?'}
             />
           <Hand 
-          type={'self'}
-          cards ={[]}/>
+          type = {'self'}
+          cards = {this.transfromHand(selfData.hand)}
+          onCardClick = {this.playACard}/>
         </div>
       </div>
     );
