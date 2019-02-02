@@ -39,7 +39,8 @@ class Game extends Component {
 
   async getMatch(){
     await axios.get(SERVER_URL + '/match/getMatch?token=' + this.props.userReducer.userData.data.token).then(reponse=>{
-      if (this.props.userReducer.isPlayerOne){
+      console.log(this.props.userReducer.isPlayerOne)
+      if (typeof reponse.data.data.player2.hand == "number"){
         this.setState({selfData : reponse.data.data.player1,
                       opponentsData : reponse.data.data.player2
                       })
@@ -73,6 +74,13 @@ class Game extends Component {
       )
       this.getMatch()
     // }
+  }
+
+  async endTurn(){
+    await axios.get(
+      SERVER_URL + '/match/endTurn?token=' + this.props.userReducer.userData.data.token
+   )
+   this.getMatch()
   }
 
 
@@ -112,7 +120,7 @@ class Game extends Component {
           type = {'self'}
           cards = {this.transfromHand(selfData.hand)}
           onCardClick = {this.playACard}/>
-           <Fab variant="extended" aria-label="Delete">
+           <Fab variant="extended" aria-label="Delete" onClick={() => this.endTurn()}>
             <ClearIcon />
             Fin de tour
           </Fab>
