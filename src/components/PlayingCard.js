@@ -27,11 +27,11 @@ class PlayingCard extends React.Component {
                         </span>
                         <br />
                         <span className="attack">
-                            attack : {attack}
+                            attaque : {attack}
                         </span>
                         <br />
                         <span className="armor">
-                            armor : {armor}
+                            armure : {armor}
                         </span>
                     </CardContent>
                 </CardActionArea>

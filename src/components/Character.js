@@ -10,7 +10,7 @@ class Character extends React.Component{
             <div>
                 <span className='ap'>{ap && ap}/3</span>
                 <img src={tempURL} className='heroImg' onClick = {() => this.props.clickOnHero()}/>
-                <span className='hp'>{hp && hp}</span>
+                <span className='hp'>{hp && Math.round(hp)}</span>
                 <span className ='nbCardDeck'>{nbCardDeck}/20</span>
                 <span className = 'playerName'>{name}</span>
             </div>
