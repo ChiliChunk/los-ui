@@ -11,6 +11,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PlayingCard from "./PlayingCard";
 import '../consts'
+import { Button } from "@material-ui/core";
+import Fab from '@material-ui/core/Fab';
+import ClearIcon from '@material-ui/icons/Clear';
 
 class Game extends Component {
   
@@ -78,7 +81,7 @@ class Game extends Component {
     return (
 
       <div className='game'>
-        <div className='panel'>
+        <div className='opponentPanel'>
           <Character 
             hp = {opponentsData.hp || '?'}
             ap = {'?'} 
@@ -98,7 +101,7 @@ class Game extends Component {
           type={'self'}
           cards ={[]}/>
         </div>
-        <div className='panel'>
+        <div className='selfPanel'>
           <Character 
             hp={selfData.hp || '?'}
             ap = {'?'}
@@ -109,6 +112,10 @@ class Game extends Component {
           type = {'self'}
           cards = {this.transfromHand(selfData.hand)}
           onCardClick = {this.playACard}/>
+           <Fab variant="extended" aria-label="Delete">
+            <ClearIcon />
+            Fin de tour
+          </Fab>
         </div>
       </div>
     );
