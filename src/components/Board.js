@@ -10,6 +10,7 @@ class Board extends React.Component{
                 {cards.map((card , index)=>{
                 return(
                     <PlayingCard
+                        keyChamp = {card.keyChamp}
                         key = {index}
                         name={card.name}
                         attack={card.attack}

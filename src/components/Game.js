@@ -39,7 +39,6 @@ class Game extends Component {
 
   async getMatch(){
     await axios.get(SERVER_URL + '/match/getMatch?token=' + this.props.userReducer.userData.data.token).then(reponse=>{
-      console.log(this.props.userReducer.isPlayerOne)
       if (typeof reponse.data.data.player2.hand == "number"){
         this.setState({selfData : reponse.data.data.player1,
                       opponentsData : reponse.data.data.player2
@@ -53,7 +52,7 @@ class Game extends Component {
   })
   }
 
-  transfromHand(hand){
+  transformCardFormat(hand){
     let result = []
     if (hand !== undefined){
       hand.map(champ =>{
@@ -102,12 +101,12 @@ class Game extends Component {
         <div className='board' style={{marginBottom:'7px'}}>
           <Board
           type={'opponent'}
-          cards ={[]}/>
+          cards ={this.transformCardFormat(opponentsData.board)}/>
         </div>
         <div className='board' style={{marginTop:'7px'}}>
           <Board 
           type={'self'}
-          cards ={[]}/>
+          cards ={this.transformCardFormat(selfData.board)}/>
         </div>
         <div className='selfPanel'>
           <Character 
@@ -118,7 +117,7 @@ class Game extends Component {
             />
           <Hand 
           type = {'self'}
-          cards = {this.transfromHand(selfData.hand)}
+          cards = {this.transformCardFormat(selfData.hand)}
           onCardClick = {this.playACard}/>
            <Fab variant="extended" aria-label="Delete" onClick={() => this.endTurn()}>
             <ClearIcon />

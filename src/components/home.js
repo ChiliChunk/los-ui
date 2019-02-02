@@ -26,8 +26,6 @@ class Home extends Component {
 
 
     async storeMatchData(match , isJoueur1){
-        console.log('MATCH FOUND')
-        await this.props.userActions.storeIsJoueurOne(isJoueur1) // to know in the game if we are player one or not
         this.props.history.push(process.env.PUBLIC_URL + "/game")
     }
     participate(){
