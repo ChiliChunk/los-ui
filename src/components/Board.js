@@ -7,9 +7,11 @@ class Board extends React.Component{
         const {type , cards} = this.props
         return(
             <React.Fragment>
-                {cards.map((card , item)=>{
+                {cards.map((card , index)=>{
                 return(
                     <PlayingCard
+                        keyChamp = {card.keyChamp}
+                        key = {index}
                         name={card.name}
                         attack={card.attack}
                         armor={card.armor}/>

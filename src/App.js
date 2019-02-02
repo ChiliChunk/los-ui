@@ -6,10 +6,13 @@ import {
   Redirect
 } from "react-router-dom";
 
-import Signin from "./Signin";
-import Signup from "./Signup";
-import Game from "./container/gameContainer";
-import "./App.css";
+
+import Unsubscribe from "./components/Unsubscribe";
+import Signin from "./components/Signin";
+import Home from "./components/home"
+import Signup from "./components/Signup";
+import "./style/App.css";
+import Game from "./components/Game";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -18,8 +21,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       return rest.isConnected ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/signin" />
-      );
+          <Redirect to="/signin" />
+        );
     }}
   />
 );
@@ -51,7 +54,11 @@ class App extends Component {
           />
           />
           <Route path="/signup" component={Signup} />
-          <PrivateRoute component={Game} isConnected={this.state.isConnected} />
+
+          <PrivateRoute path="/unsubscribe" component={Unsubscribe} isConnected={this.state.isConnected}/>
+          <PrivateRoute path="/game" component={Game} isConnected={this.state.isConnected}/>
+          <PrivateRoute component={Home} isConnected={this.state.isConnected} />
+
         </Switch>
       </Router>
     );

@@ -2,16 +2,13 @@
     height: 20;
   }
 
-.card.MuiPaper-elevation1-5 {
-    width: 150px;
-    border-radius: 30px;
-    height: 100%;
-    margin-left: 5px;
-    margin-right: 5px;
-    /*box-shadow: 10px 10px 5px grey;*/
-}
 .card {
-    text-align: center
+    width: 150px !important;
+    border-radius: 30px !important;
+    height: 100% !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    text-align: center !important;
 
 }
 .imgCard{
@@ -24,6 +21,8 @@
 }
 
 .backCard{
-    height: -webkit-fill-available;
+    height: -moz-available;          /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    height: fill-available;
     width: inherit;
 }
