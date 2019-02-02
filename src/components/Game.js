@@ -25,7 +25,8 @@ class Game extends Component {
     this.getMatch()
     this.state = {
       selfData : {},
-      opponentsData : {}
+      opponentsData : {},
+      apPoints : 0
     }
   }
 
@@ -70,21 +71,43 @@ class Game extends Component {
     console.log(hand[index].key)  
     await axios.get(
          SERVER_URL + '/match/playCard?card=' + hand[index].key + '&token=' + this.props.userReducer.userData.data.token
-      )
+      ).then(reponse=>{
+        if (reponse.data.status !== "error"){
+          this.addActionPoint()
+        }
+      })
       this.getMatch()
+      
     // }
   }
 
-  async endTurn(){
-    await axios.get(
-      SERVER_URL + '/match/endTurn?token=' + this.props.userReducer.userData.data.token
-   )
-   this.getMatch()
+  addActionPoint(){
+    let {apPoints} = this.state
+      apPoints += 1
+      this.setState({
+        apPoints
+      })
   }
 
+  async endTurn(){
+    
+    await axios.get(
+      SERVER_URL + '/match/endTurn?token=' + this.props.userReducer.userData.data.token
+      )
+      this.setState({apPoints : 0})
+    this.getMatch()
+  }
+
+  async pickCard(){
+    await axios.get(
+      SERVER_URL + '/match/pickCard?token=' + this.props.userReducer.userData.data.token
+      )
+    this.addActionPoint()  
+    this.getMatch()
+  }
 
   render() {
-    const {selfData , opponentsData} = this.state
+    const {selfData , opponentsData , apPoints} = this.state
     return (
 
       <div className='game'>
@@ -110,8 +133,9 @@ class Game extends Component {
         </div>
         <div className='selfPanel'>
           <Character 
+            clickOnHero = {this.pickCard.bind(this)}
             hp={selfData.hp || '?'}
-            ap = {'?'}
+            ap = {apPoints}
             nbCarteDeck = {selfData.deck || '?'}
             name = {selfData.name || '?'}
             />
@@ -121,7 +145,7 @@ class Game extends Component {
           onCardClick = {this.playACard}/>
            <Fab variant="extended" aria-label="Delete" onClick={() => this.endTurn()}>
             <ClearIcon />
-            Fin de tour
+            {selfData.turn ? 'Fin de tour' : `Tour adverse`}
           </Fab>
         </div>
       </div>

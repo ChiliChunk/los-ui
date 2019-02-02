@@ -10,9 +10,8 @@ class Hand extends React.Component{
                 <div className='hand'>
                     {cards.map((card , index)=>{
                     return(
-                    <span onClick={() => this.props.onCardClick(index)}>
+                    <span key={index} onClick={() => this.props.onCardClick(index)}>
                         <PlayingCard
-                            key={index}
                             keyChamp = {card.keyChamp}
                             name={card.name}
                             attack={card.attack}
