@@ -28,6 +28,9 @@ class Game extends Component {
       opponentsData : {},
       apPoints : 0
     }
+    setInterval(
+      () => this.getMatch(),3000
+    )
   }
 
   async initDeck(){
@@ -53,13 +56,13 @@ class Game extends Component {
   })
   }
 
-  transformCardFormat(hand){
+  transformCardFormat(champsArray){
     let result = []
-    if (hand !== undefined){
-      hand.map(champ =>{
+    if (champsArray !== undefined){
+      champsArray.map(champ =>{
         let roundedAttack = Math.round(champ.stats.attackdamage)
         let roundedArmor = Math.round(champ.stats.armor)
-        result.push({keyChamp : champ.key , name : champ.name , attack : roundedAttack , armor : roundedArmor})
+        result.push({keyChamp : champ.key , name : champ.name , attack : roundedAttack , armor : roundedArmor , canAttack:!champ.attack})
       })
     }
     return result
@@ -102,7 +105,11 @@ class Game extends Component {
     await axios.get(
       SERVER_URL + '/match/pickCard?token=' + this.props.userReducer.userData.data.token
       )
-    this.addActionPoint()  
+      .then(reponse=>{
+        if (reponse.data.status !== "error"){
+          this.addActionPoint()
+        }
+      })
     this.getMatch()
   }
 
