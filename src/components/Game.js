@@ -64,8 +64,9 @@ class Game extends Component {
   async playACard(index){
     const {hand} = this.state.selfData
     // if (this.state.selfData.turn){
-      await axios.get(
-        SERVER_URL + 'match/playcard?card=' + hand[index].key + '&token=' + this.props.userReducer.userData.data.token
+    console.log(hand[index].key)  
+    await axios.get(
+         SERVER_URL + '/match/playCard?card=' + hand[index].key + '&token=' + this.props.userReducer.userData.data.token
       )
       this.getMatch()
     // }
