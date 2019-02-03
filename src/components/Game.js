@@ -9,7 +9,6 @@ import { SERVER_URL } from "../consts";
 import * as userActions from '../actions/userActions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import PlayingCard from "./PlayingCard";
 import '../consts'
 import { Button } from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
@@ -229,8 +228,10 @@ class Game extends Component {
       {this.renderMatchFinishedDialog()}
         <div className='opponentPanel'>
           <Character 
+            highlightToPickCard = {false}
             hp = {opponentData.hp || '?'}
             ap = {'?'} 
+            imgUrl = 'https://vignette.wikia.nocookie.net/wow/images/3/32/Lardeur_par_autogatos.jpg/revision/latest?cb=20151102200011&path-prefix=fr'
             nbCardDeck = {opponentData.deck || '?'}
             name = {opponentData.name || '?'}/>
           <Hand 
@@ -252,9 +253,11 @@ class Game extends Component {
         </div>
         <div className='selfPanel'>
           <Character 
+            highlightToPickCard = {selfData.turn && !selfData.cardPicked}
             clickOnHero = {this.pickCard.bind(this)}
             hp={selfData.hp || '?'}
             ap = {apPoints}
+            imgUrl = 'https://static1.millenium.org/articles/1/29/27/31/@/370571-borq0xuccaadskf-article_m-1.jpg'
             nbCardDeck = {selfData.deck || '?'}
             name = {selfData.name || '?'}
             />
