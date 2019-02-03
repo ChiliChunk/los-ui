@@ -188,8 +188,9 @@ class Game extends Component {
     this.getMatch()
   }
 
-  handleDialogClose(){
-      axios.get(
+  async handleDialogClose(){
+      this.setState({renderLooseDialog : false , renderWinDialog : false})
+      await axios.get(
         SERVER_URL + '/match/finishMatch?token='+this.props.userReducer.userData.data.token
         )
       this.props.history.push(process.env.PUBLIC_URL + "/home")
@@ -212,7 +213,7 @@ class Game extends Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => {this.setState({renderLooseDialog : false , renderWinDialog : false})}} color="primary" autoFocus>
+            <Button onClick={() => this.handleDialogClose()} color="primary" autoFocus>
               Retour a l'accueil
             </Button>
           </DialogActions>
