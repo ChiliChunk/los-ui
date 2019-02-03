@@ -18,75 +18,77 @@ class Home extends Component {
         super(props)
         this.state = {
             isReady: false,
-            requests : [],
-            matchFound : false,
-            showDeckMaker : false
+            requests: [],
+            matchFound: false,
+            showDeckMaker: false
         }
     }
 
 
-    async storeMatchData(match , isJoueur1){
+    async storeMatchData(match, isJoueur1) {
         this.props.history.push(process.env.PUBLIC_URL + "/game")
     }
-    participate(){
+    participate() {
         console.log('call to participate')
         console.log(this.state)
-        if (this.props.userReducer.userData.data){
+        if (this.props.userReducer.userData.data) {
             axios
-                .get( 
-                SERVER_URL +
-                    "/matchmaking/participate?token="+this.props.userReducer.userData.data.token
+                .get(
+                    SERVER_URL +
+                    "/matchmaking/participate?token=" + this.props.userReducer.userData.data.token
                 )
                 .then(res => {
-                this.setState({
-                    requests : res.data.data.request,
-                })
-                if(res.data.data.match !== undefined && res.data.data.match !== null){ //connected player send the request
-                   this.storeMatchData(res.data.data.match , true)
-                }
-            });
+                    this.setState({
+                        requests: res.data.data.request,
+                    })
+                    if (res.data.data.match !== undefined && res.data.data.match !== null) { //connected player send the request
+                        this.storeMatchData(res.data.data.match, true)
+                    }
+                });
         }
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         console.log('UNMOUNT')
     }
 
     switchReady() {
-        this.setState({ isReady: !this.state.isReady })           
-        
+        this.setState({ isReady: !this.state.isReady })
+
         axios
-            .get( 
-            SERVER_URL +
-                "/matchmaking/participate?token="+this.props.userReducer.userData.data.token
+            .get(
+                SERVER_URL +
+                "/matchmaking/participate?token=" + this.props.userReducer.userData.data.token
             )
             .then(res => {
-            this.setState({
-                requests : res.data.data.request,
-            })
-            if(res.data.data.match !== undefined && res.data.data.match !== null){ //connected player send the request
-               this.storeMatchData(res.data.data.match)
-            }
-        });
+                this.setState({
+                    requests: res.data.data.request,
+                })
+                if (res.data.data.match !== undefined && res.data.data.match !== null) { //connected player send the request
+                    this.storeMatchData(res.data.data.match)
+                }
+            });
         axios
-            .get( 
-            SERVER_URL +
-                "/matchmaking/getAll?token="+this.props.userReducer.userData.data.token
+            .get(
+                SERVER_URL +
+                "/matchmaking/getAll?token=" + this.props.userReducer.userData.data.token
             )
 
             .then(res => {
                 let a
                 let allReadyPlayers = []
                 let tab = []
-                for (a in res.data.data){
-                    allReadyPlayers[a]=res.data.data[a].name
-                    tab[a]=res.data.data[a].matchmakingId
+                for (a in res.data.data) {
+                    allReadyPlayers[a] = res.data.data[a].name
+                    tab[a] = res.data.data[a].matchmakingId
                 }
-                tab=res.data.data
-                this.setState({allReadyPlayers : allReadyPlayers,
-                    matchmakingIds : tab })
+                tab = res.data.data
+                this.setState({
+                    allReadyPlayers: allReadyPlayers,
+                    matchmakingIds: tab
+                })
             });
-              
+
     }
 
     handleDisco() {
@@ -101,20 +103,23 @@ class Home extends Component {
             })
     }
 
-    closeDeckMaker(){
+    closeDeckMaker() {
         console.log("close deck")
-        this.setState({showDeckMaker : false})
+        this.setState({ showDeckMaker: false })
     }
 
     render() {
-        if (this.state.showDeckMaker){
+        return (
+            <Game />
+        )
+        if (this.state.showDeckMaker) {
             return (
                 <DeckMaker
-                closeDeckMaker = {this.closeDeckMaker.bind(this)}/>
+                    closeDeckMaker={this.closeDeckMaker.bind(this)} />
             )
         }
-        if (this.state.matchFound){
-            return(
+        if (this.state.matchFound) {
+            return (
                 <Game />
             )
         }
@@ -126,7 +131,7 @@ class Home extends Component {
         return (
             <div className="home">
                 <div className="header">
-                    <Button className="buttonDisconnect" variant="contained" color="default" onClick={()=>this.handleDisco()}>
+                    <Button className="buttonDisconnect" variant="contained" color="default" onClick={() => this.handleDisco()}>
                         Deconnexion
                     </Button>
 
@@ -137,31 +142,31 @@ class Home extends Component {
                 <h3>Bienvenue {this.props.userReducer.userData.data && this.props.userReducer.userData.data.name}</h3>
                 <div className="matchmaking">
                     {this.state.isReady ? <MatchakingTab
-                                            type = "availablePlayers"
-                                            key={1}
-                                            players={this.state.allReadyPlayers}
-                                            matchmakingIds = {this.state.matchmakingIds}
-                                            title = "Joueurs a défier"/> : null}
-                    
+                        type="availablePlayers"
+                        key={1}
+                        players={this.state.allReadyPlayers}
+                        matchmakingIds={this.state.matchmakingIds}
+                        title="Joueurs a défier" /> : null}
+
                     {this.state.isReady ? <MatchakingTab
-                                            key={2}
-                                            type = "challengeRequests"
-                                            players={(this.state.requests || [])}
-                                            storeMatchData = {this.storeMatchData}
-                                            matchmakingIds = {this.state.matchmakingIds}
-                                            title = "Joueurs voulant vous defier"/> : null}
-                    
+                        key={2}
+                        type="challengeRequests"
+                        players={(this.state.requests || [])}
+                        storeMatchData={this.storeMatchData}
+                        matchmakingIds={this.state.matchmakingIds}
+                        title="Joueurs voulant vous defier" /> : null}
+
                     <Button className="buttonReady" variant="contained" disabled={this.props.userReducer && this.props.userReducer.deck.length === 0 ? true : false} onClick={this.switchReady.bind(this)}>
                         {textButton}
                     </Button>
-                    <br/>
+                    <br />
 
 
 
                 </div>
 
                 <div className="createDeck">
-                    <Button variant="contained" onClick={() =>{this.setState({showDeckMaker : true})}}>
+                    <Button variant="contained" onClick={() => { this.setState({ showDeckMaker: true }) }}>
                         Créer Deck
                     </Button>
                 </div>
@@ -172,7 +177,7 @@ class Home extends Component {
 
 function mapStateToProps(state) {
     return {
-      userReducer: state.userReducer
+        userReducer: state.userReducer
     }
 }
 

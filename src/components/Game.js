@@ -14,22 +14,23 @@ import '../consts'
 import { Button } from "@material-ui/core";
 import Fab from '@material-ui/core/Fab';
 import ClearIcon from '@material-ui/icons/Clear';
+import { testselfData, testopponentData } from '../testDataGame'
 
 class Game extends Component {
-  
-  constructor(props){
+
+  constructor(props) {
     super(props)
     this.playACard = this.playACard.bind(this)
-    this.getMatch()
-    this.initDeck()
-    this.getMatch()
+    // this.getMatch()
+    // this.initDeck()
+    // this.getMatch()
     this.state = {
-      selfData : {},
-      opponentsData : {}
+      selfData: testselfData,
+      opponentsData: testopponentData
     }
   }
 
-  async initDeck(){
+  async initDeck() {
     let requestUrl = SERVER_URL + '/match/initDeck?deck='
     requestUrl += JSON.stringify(this.props.userReducer.deck)
     requestUrl += "&token=" + this.props.userReducer.userData.data.token
@@ -37,89 +38,91 @@ class Game extends Component {
     })
   }
 
-  async getMatch(){
-    await axios.get(SERVER_URL + '/match/getMatch?token=' + this.props.userReducer.userData.data.token).then(reponse=>{
-      if (typeof reponse.data.data.player2.hand == "number"){
-        this.setState({selfData : reponse.data.data.player1,
-                      opponentsData : reponse.data.data.player2
-                      })
+  async getMatch() {
+    await axios.get(SERVER_URL + '/match/getMatch?token=' + this.props.userReducer.userData.data.token).then(reponse => {
+      if (typeof reponse.data.data.player2.hand == "number") {
+        this.setState({
+          selfData: reponse.data.data.player1,
+          opponentsData: reponse.data.data.player2
+        })
       }
-      else{
-        this.setState({selfData : reponse.data.data.player2,
-                      opponentsData : reponse.data.data.player1,
-          })
+      else {
+        this.setState({
+          selfData: reponse.data.data.player2,
+          opponentsData: reponse.data.data.player1,
+        })
       }
-  })
+    })
   }
 
-  transformCardFormat(hand){
+  transformCardFormat(hand) {
     let result = []
-    if (hand !== undefined){
-      hand.map(champ =>{
+    if (hand !== undefined) {
+      hand.map(champ => {
         let roundedAttack = Math.round(champ.stats.attackdamage)
         let roundedArmor = Math.round(champ.stats.armor)
-        result.push({keyChamp : champ.key , name : champ.name , attack : roundedAttack , armor : roundedArmor})
+        result.push({ keyChamp: champ.key, name: champ.name, attack: roundedAttack, armor: roundedArmor })
       })
     }
     return result
   }
 
-  async playACard(index){
-    const {hand} = this.state.selfData
+  async playACard(index) {
+    const { hand } = this.state.selfData
     // if (this.state.selfData.turn){
-    console.log(hand[index].key)  
+    console.log(hand[index].key)
     await axios.get(
-         SERVER_URL + '/match/playCard?card=' + hand[index].key + '&token=' + this.props.userReducer.userData.data.token
-      )
-      this.getMatch()
+      SERVER_URL + '/match/playCard?card=' + hand[index].key + '&token=' + this.props.userReducer.userData.data.token
+    )
+    this.getMatch()
     // }
   }
 
-  async endTurn(){
+  async endTurn() {
     await axios.get(
       SERVER_URL + '/match/endTurn?token=' + this.props.userReducer.userData.data.token
-   )
-   this.getMatch()
+    )
+    this.getMatch()
   }
 
 
   render() {
-    const {selfData , opponentsData} = this.state
+    const { selfData, opponentsData } = this.state
     return (
 
       <div className='game'>
         <div className='opponentPanel'>
-          <Character 
-            hp = {opponentsData.hp || '?'}
-            ap = {'?'} 
-            nbCarteDeck = {opponentsData.deck || '?'}
-            name = {opponentsData.name || '?'}/>
-          <Hand 
-          type={'opponent'}
-          cards ={opponentsData.hand}/>
+          <Character
+            hp={opponentsData.hp || '?'}
+            ap={'?'}
+            nbCarteDeck={opponentsData.deck || '?'}
+            name={opponentsData.name || '?'} />
+          <Hand
+            type={'opponent'}
+            cards={opponentsData.hand} />
         </div>
-        <div className='board' style={{marginBottom:'7px'}}>
+        <div className='board' style={{ marginBottom: '7px' }}>
           <Board
-          type={'opponent'}
-          cards ={this.transformCardFormat(opponentsData.board)}/>
+            type={'opponent'}
+            cards={this.transformCardFormat(opponentsData.board)} />
         </div>
-        <div className='board' style={{marginTop:'7px'}}>
-          <Board 
-          type={'self'}
-          cards ={this.transformCardFormat(selfData.board)}/>
+        <div className='board' style={{ marginTop: '7px' }}>
+          <Board
+            type={'self'}
+            cards={this.transformCardFormat(selfData.board)} />
         </div>
         <div className='selfPanel'>
-          <Character 
+          <Character
             hp={selfData.hp || '?'}
-            ap = {'?'}
-            nbCarteDeck = {selfData.deck || '?'}
-            name = {selfData.name || '?'}
-            />
-          <Hand 
-          type = {'self'}
-          cards = {this.transformCardFormat(selfData.hand)}
-          onCardClick = {this.playACard}/>
-           <Fab variant="extended" aria-label="Delete" onClick={() => this.endTurn()}>
+            ap={'?'}
+            nbCarteDeck={selfData.deck || '?'}
+            name={selfData.name || '?'}
+          />
+          <Hand
+            type={'self'}
+            cards={this.transformCardFormat(selfData.hand)}
+            onCardClick={this.playACard} />
+          <Fab variant="extended" aria-label="Delete" onClick={() => this.endTurn()}>
             <ClearIcon />
             Fin de tour
           </Fab>
@@ -137,7 +140,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-      userActions: bindActionCreators(userActions, dispatch),
+    userActions: bindActionCreators(userActions, dispatch),
   }
 }
 

@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-image: url("../board.jpg");
+    background-image: url("../boardLos.png");
     background-size: 100% 100%;
 
 }
