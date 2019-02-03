@@ -6,7 +6,14 @@
     background-size: 100% 100%;
 
 }
-.panel{
+.selfPanel{
+    display: flex;
+    flex: 0 0 23%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.opponentPanel{
     display: flex;
     flex: 0 0 23%;
 }
@@ -20,4 +27,8 @@
 
 .total{
     height: 100%;
+}
+
+.endOfMatchDialog{
+    overflow-x: hidden;
 }

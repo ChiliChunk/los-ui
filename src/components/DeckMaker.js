@@ -58,13 +58,7 @@ class DeckMaker extends React.Component {
         this.props.closeDeckMaker()
         this.props.userActions.storeDeck(finalDeck)
         console.log(finalDeck)
-        // let requestUrl = SERVER_URL + '/match/initDeck?deck='
-        // requestUrl += JSON.stringify(objectUrl)
-        // requestUrl += "&token=" + this.props.userReducer.userData.data.token
-        // console.log(requestUrl)
-        // axios.get(requestUrl).then((response) => {
-        //     console.log(response)
-        // })
+ 
 
     }
 
@@ -75,8 +69,10 @@ class DeckMaker extends React.Component {
                 <div className="cardsPacked">
                     <h2 className="title"> Toutes les cartes</h2>
                     {(championsNotSelected).map((champions, index) => {
+                        let roundedAttack = Math.round(champions.stats.attackdamage)
+                        let roundedArmor = Math.round(champions.stats.armor)
                         return (
-                            <span key={index} onClick={() => this.addCard(index)}><PlayingCard name={champions.name} attack={champions.info.attack} armor={champions.info.defense} keyChamp={champions.key} /></span>
+                            <span key={index} onClick={() => this.addCard(index)}><PlayingCard name={champions.name} attack={roundedAttack} armor={roundedArmor} keyChamp={champions.key} /></span>
                         )
                     })}
                 </div>
@@ -84,8 +80,10 @@ class DeckMaker extends React.Component {
                 <div className="cardsPacked">
                     <h2 className="title"> Mon deck</h2>
                     {(championsSelected).map((champions, index) => {
+                        let roundedAttack = Math.round(champions.stats.attackdamage)
+                        let roundedArmor = Math.round(champions.stats.armor)
                         return (
-                            <span key={index} onClick={() => this.removeCard(index)} > <PlayingCard name={champions.name} attack={champions.info.attack} armor={champions.info.defense} keyChamp={champions.key} /></span>
+                            <span key={index} onClick={() => this.removeCard(index)} > <PlayingCard name={champions.name} attack={roundedAttack} armor={roundedArmor} keyChamp={champions.key} /></span>
                         )
                     })}
                 </div>

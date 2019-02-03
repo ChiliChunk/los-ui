@@ -26,20 +26,12 @@ class Home extends Component {
             matchFound: false,
             showDeckMaker: false
         }
-        this.interval = setInterval(
-            () => this.participate(), 3000);
+
     }
 
-    storeMatchData(match, isJoueur1) {
-        console.log('MATCH FOUND')
-        clearInterval(this.interval)
-        this.setState({
-            matchFound: true,
-            player1: { name: match.player1.name, id: match.player1.id },
-            player2: { name: match.player2.name, id: match.player2.id },
-            isJoueur1: isJoueur1
-        })
-        // send init deck avec le deck du  reducer
+
+    async storeMatchData(match , isJoueur1){
+        this.props.history.push(process.env.PUBLIC_URL + "/game")
     }
     participate() {
         console.log('call to participate')
@@ -59,8 +51,14 @@ class Home extends Component {
                 });
         }
     }
+
+    componentWillUnmount(){
+        console.log('UNMOUNT')
+    }
+
     switchReady() {
-        this.setState({ isReady: !this.state.isReady })
+        this.setState({ isReady: !this.state.isReady })           
+        
         axios
             .get(
                 SERVER_URL +
@@ -100,7 +98,7 @@ class Home extends Component {
     handleDisco() {
         axios
             .get(SERVER_URL + "/users/disconnect?token=" +
-                this.props.user.userData.data.token)
+                this.props.userReducer.userData.data.token)
             .then(res => {
                 console.log(res); if (res.data.status === "ok") {
                     alert("Vous étes deconnecté")
@@ -133,7 +131,6 @@ class Home extends Component {
         let test = crossedSword
         return (
             <div className="home">
-
                 <Paper elevation={2} className="centralPaper">
                     <div className="header">
 
@@ -175,7 +172,7 @@ class Home extends Component {
                     <div className="createDeck">
                         <Button variant="contained" onClick={() => { this.setState({ showDeckMaker: true }) }}>
                             Modifier Deck
-                    </Button>
+                        </Button>
                     </div>
                 </Paper>
             </div>
