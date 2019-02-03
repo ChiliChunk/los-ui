@@ -231,7 +231,7 @@ class Game extends Component {
           <Character 
             hp = {opponentData.hp || '?'}
             ap = {'?'} 
-            nbCarteDeck = {opponentData.deck || '?'}
+            nbCardDeck = {opponentData.deck || '?'}
             name = {opponentData.name || '?'}/>
           <Hand 
           type={'opponent'}
@@ -255,7 +255,7 @@ class Game extends Component {
             clickOnHero = {this.pickCard.bind(this)}
             hp={selfData.hp || '?'}
             ap = {apPoints}
-            nbCarteDeck = {selfData.deck || '?'}
+            nbCardDeck = {selfData.deck || '?'}
             name = {selfData.name || '?'}
             />
           <Hand 
