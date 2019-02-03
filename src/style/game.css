@@ -28,3 +28,7 @@
 .total{
     height: 100%;
 }
+
+.endOfMatchDialog{
+    overflow-x: hidden;
+}

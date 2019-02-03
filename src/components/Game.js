@@ -53,6 +53,13 @@ class Game extends Component {
 
   async getMatch(){
     await axios.get(SERVER_URL + '/match/getMatch?token=' + this.props.userReducer.userData.data.token).then(reponse=>{
+      console.log(reponse)
+      console.log(reponse.data.data.status === 'Deck is pending')
+      if (reponse.data.data.status === 'Deck is pending'){
+        console.log('onInitdeck')
+        this.initDeck()
+      }
+      
       if (typeof reponse.data.data.player2.hand == "number"){
         this.setState({selfData : reponse.data.data.player1,
                       opponentData : reponse.data.data.player2,
