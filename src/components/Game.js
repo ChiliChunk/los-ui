@@ -228,6 +228,7 @@ class Game extends Component {
       {this.renderMatchFinishedDialog()}
         <div className='opponentPanel'>
           <Character 
+            clickOnHero = {() => {}}
             highlightToPickCard = {false}
             hp = {opponentData.hp || '?'}
             ap = {'?'} 
