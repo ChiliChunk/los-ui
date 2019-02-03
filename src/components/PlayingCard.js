@@ -49,12 +49,8 @@ class PlayingCard extends React.Component {
     renderBack() {
         return (
             <img className="imgBack"
-
                 src="https://www.hearthstonetopdecks.com/wp-content/uploads/2014/06/card-back-tespa-199x300.png"
             />
-
-            //src="https://images4.alphacoders.com/101/101176.jpg"
-            //src="https://vignette.wikia.nocookie.net/hearthstone/images/c/c4/Card_back-Default.png/revision/latest?cb=20140823204025"
         )
     }
 
