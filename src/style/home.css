@@ -2,6 +2,7 @@
 .header{
     display: flex;
     justify-content: flex-end;
+    padding-top:0px;
 }
 
 .buttonDeleteAccount{
@@ -9,7 +10,7 @@
     background-color:firebrick !important;
 }
 
-/* See if we can use something else than !important (material ui properties or flex)*/
+ /*See if we can use something else than !important (material ui properties or flex)*/
 
 .buttonDisconnect{
     margin-right: 2% !important;
@@ -26,4 +27,21 @@
     margin-top: 5%;
     display: flex;
     justify-content: center;
+}
+
+.home{
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: aliceblue;
+    text-align: center;
+}
+.centralPaper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 60%;
 }

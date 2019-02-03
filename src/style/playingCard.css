@@ -50,3 +50,14 @@ svg{
 .health{
     fill:darkred;
 }
+.canAttack{
+    border-style:solid;
+    border-color: gold;
+}
+
+.backCard{
+    height: -moz-available;          /* WebKit-based browsers will ignore this. */
+    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    height: fill-available;
+    width: inherit;
+}
