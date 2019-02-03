@@ -8,21 +8,22 @@
 }
 .selfPanel{
     display: flex;
-    flex: 0 0 23%;
+    height :23%;
     justify-content: space-between;
     align-items: center;
 }
 
 .opponentPanel{
     display: flex;
-    flex: 0 0 23%;
+    height :23%;
 }
 
 .board{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height :23%;
     display: flex;
     justify-content : center;
-    height: 26%;
-    flex: 1 0 auto;
 }
 
 .total{
