@@ -1,15 +1,14 @@
-.media {
-    height: 20;
-  }
-
 .card {
     width: 150px !important;
+    height: 95% !important;
     border-radius: 30px !important;
-    height: 100% !important;
     margin-left: 5px !important;
     margin-right: 5px !important;
-    text-align: center !important;
+    text-align: center !important; 
+}
 
+.imgBack{
+    height:100%;
 }
 .imgCard{
     width: 100%;
@@ -20,9 +19,32 @@
     font-size: 1.3em;
 }
 
-.backCard{
-    height: -moz-available;          /* WebKit-based browsers will ignore this. */
-    height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
-    height: fill-available;
-    width: inherit;
+.content{
+    padding :0px !important;
+    display: flex;
+    flex-direction:column ;
+}
+
+.charac{
+    flex-grow: 1;
+    display: flex;
+    flex-direction:row ;
+    justify-content: center;
+    width: 40px;
+}
+
+svg{
+    height:25px;
+    width:25px;
+}
+
+.characs{
+    display:flex;
+    flex-direction: row;
+}
+.attack{
+    fill:orange;
+}
+.health{
+    fill:darkred;
 }
