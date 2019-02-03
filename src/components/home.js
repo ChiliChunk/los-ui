@@ -92,7 +92,7 @@ class Home extends Component {
     handleDisco() {
         axios
             .get(SERVER_URL + "/users/disconnect?token=" +
-                this.props.user.userData.data.token)
+                this.props.userReducer.userData.data.token)
             .then(res => {
                 console.log(res); if (res.data.status === "ok") {
                     alert("Vous étes deconnecté")
