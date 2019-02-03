@@ -39,7 +39,7 @@ class Game extends Component {
       renderWinDialog : false
     }
     setInterval(
-      () => this.getMatch(),3000
+      () => this.getMatch(),2000
     )
   }
 
@@ -56,7 +56,6 @@ class Game extends Component {
       console.log(reponse)
       console.log(reponse.data.data.status === 'Deck is pending')
       if (reponse.data.data.status === 'Deck is pending'){
-        console.log('onInitdeck')
         this.initDeck()
       }
       
@@ -73,7 +72,7 @@ class Game extends Component {
           })
       }
       if (reponse.data.data.player2.hp <= 0 || reponse.data.data.player2.hp <= 0){
-        if(reponse.data.status.charAt(7) === this.state.playerNumber){
+        if(reponse.data.data.status.charAt(7) === this.state.playerNumber){
           console.log('YOU WIN')
            this.setState({
             renderWinDialog : true,

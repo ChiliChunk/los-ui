@@ -8,7 +8,7 @@ class Character extends React.Component{
         const {ap,hp,name,nbCardDeck} = this.props
         return(
             <div>
-                <span className='ap'>{ap && ap}/3</span>
+                {/* <span className='ap'>{ap && ap}/3</span> NO NEED MANA COUNT*/}
                 <img src={tempURL} className='heroImg' onClick = {() => this.props.clickOnHero()}/>
                 <span className='hp'>{hp && Math.round(hp)}</span>
                 <span className ='nbCardDeck'>{nbCardDeck}/20</span>
