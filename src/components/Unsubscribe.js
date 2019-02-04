@@ -51,10 +51,7 @@ class Unsubscribe extends Component {
 
             }
           })
-          .catch(function (error) {
-            console.log(error);
-          });
-          ;
+          );
       }
       handleChangeEmail(e) {
         this.setState({ email: e.target.value });

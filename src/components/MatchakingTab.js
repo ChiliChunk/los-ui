@@ -33,18 +33,12 @@ class MatchakingTab extends React.Component {
     }
 
     requestAPlayer(e, index) {
-        console.log(e, index)
-        console.log(this.props.matchmakingIds)
         e.preventDefault();
         axios
             .get(
                 SERVER_URL +
                 "/matchmaking/request?matchmakingId=" + this.props.matchmakingIds[index].matchmakingId + "&token=" + this.props.userReducer.userData.data.token
-            )
-            .then(res => {
-                console.log(res)
-                console.log(this.props)
-            });
+            );
     }
 
     defyButton(idJoueur) {
@@ -57,16 +51,12 @@ class MatchakingTab extends React.Component {
         return ret
     }
 
-    acceptRequest(index) { // /!\ ATTENTION : check if we accept the request of the good player
-        console.log(this.state.requests)
-        console.log(this.state.requests[index].matchmakingId)
+    acceptRequest(index) { // /!\ ATTENTION : check if we accept the request of the good playe
         axios
             .get(
                 SERVER_URL +
                 "/matchmaking/acceptRequest?matchmakingId=" + this.state.requests[index].matchmakingId + "&token=" + this.props.userReducer.userData.data.token
             ).then(res => {
-                console.log("ACCEPT REQUEST")
-                console.log(res)
                 this.props.storeMatchData(res.data.data, false)
             });
     }
@@ -74,7 +64,6 @@ class MatchakingTab extends React.Component {
     allPlayers() {
         if (this.props.type === "availablePlayers") {
             let ret = [];
-            console.log(this.props.players);
             (this.props.players || []).map((player, index) => {
                 let defyButton = this.defyButton((player, index))
                 ret.push(
@@ -89,7 +78,6 @@ class MatchakingTab extends React.Component {
         else {
             let ret = [];
             let cpt = 0
-            console.log(this.props.players);
             (this.state.requests || []).map((player, index) => {
                 cpt += 1
                 let defyButton = this.defyButton((player, index))
@@ -110,11 +98,9 @@ class MatchakingTab extends React.Component {
                 "/matchmaking/participate?token=" + this.props.userReducer.userData.data.token
             )
             .then(res => {
-                console.log(res)
                 this.setState({
                     requests: res.data.data.request
-                }, () => { console.log(this.state) })
-                console.log(this.state)
+                })
             });
     }
 
