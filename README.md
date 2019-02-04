@@ -2,8 +2,10 @@
 
 This projet has been created with [Create React App](https://github.com/facebook/create-react-app).<br/>
 
+Accessible online at [62.4.16.191:5000](62.4.16.191:5000)<br>
+
 Node packages used client side:
-[Material-ui](https://github.com/mui-org/material-ui)
+[Material-ui](https://github.com/mui-org/material-ui)<br/>
 [React-redux](https://github.com/reduxjs/react-redux)
 
 Node packages server client side:
