@@ -30,7 +30,7 @@ class Home extends Component {
     }
 
 
-    async storeMatchData(match , isJoueur1){
+    storeMatchData(match , isJoueur1){
         this.props.history.push(process.env.PUBLIC_URL + "/game")
     }
     participate() {
@@ -163,7 +163,7 @@ class Home extends Component {
                             matchmakingIds={this.state.matchmakingIds}
                             title="Joueurs voulant vous defier" /> : null}
 
-                        <Button className="buttonReady" variant="contained" onClick={this.switchReady.bind(this)}>
+                        <Button className="buttonReady" variant="contained" disabled = {this.props.userReducer && this.props.userReducer.deck.length === 20? false : true} onClick={this.switchReady.bind(this)}>
                             {textButton}
                         </Button>
                         <br />
