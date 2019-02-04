@@ -3,13 +3,20 @@
     width: 150px;
     border-radius: 80px;
 }
-
-.hp{
-    font-size: 2em;
-    color: white;
-    margin-left: -25px;
-    background-color: red;
-    border-radius : 15px;
+.hero{
+    height:100%;
+    display: flex;
+    flex-direction: row;
+}
+.informations{
+    display: flex;
+    flex-direction: column !important;
+}
+.recap{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow: visible;
 }
 
 .goldenHero{
@@ -17,11 +24,9 @@
     border-color: gold;
 }
 
-
-.ap{
-    font-size: 2em;
-    color: white;
-    margin-right: -25px;
-    background-color: blue;
-    border-radius : 15px;
+.lifeSvg{
+    fill:darkred;
+}
+.deckSvg{
+    fill:darkgoldenrod
 }
