@@ -12,16 +12,21 @@
     display: flex;
     flex-direction: column !important;
 }
-
-.hp{
-    height: 50px;
-    font-size: 2em;
-    color: white;
-    background-color: red;
-    border-radius : 15px;
+.recap{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow: visible;
 }
 
 .goldenHero{
     border-style: solid;
     border-color: gold;
+}
+
+.lifeSvg{
+    fill:darkred;
+}
+.deckSvg{
+    fill:darkgoldenrod
 }
