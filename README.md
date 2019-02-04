@@ -1,78 +1,36 @@
-## Warning
+# League of Stones
 
-Coding rules :
+This projet has been created with [Create React App](https://github.com/facebook/create-react-app).
 
-- all variables, comments, commits messages, files and functions names _must_ be in english
-- The final version of this project should not have any console.log (or worse, alert())
-- You're free to change the linter rules but then stick to them (in VS code, use the "Prettier - Code formatter" extension with format on save).
-- Feel free to change the existing code
-- Add tests
+Node packages used client side:
+[Material-ui](https://github.com/mui-org/material-ui)
+[React-redux](https://github.com/reduxjs/react-redux)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Node packages server client side:
+[bcrypt](https://github.com/kelektiv/node.bcrypt.js/)
 
-## Available Scripts
+## Installation:
+Install and launch node.js server (this require a running mongodb on your computer)
+```$ git clone https://github.com/ChiliChunk/League-Of-Stones.git```
+``` $ cd League-Of-Stones/```
+```$ npm install```
+```$ npm run start```
 
-In the project directory, you can run:
+Install and launch the react front end client (next to the League-Of-Stones foder)
+```$ git clone https://github.com/ChiliChunk/los-ui.git```
+```$ cd los-ui/```
+```$ npm install```
+```$ npm run start```
 
-### `npm start`
+## See the app running:
+The node.js server is running on localhost:3001
+The react client is running on localhost:3000 so you can acces the web application typing localhost:3001 on your brower serch bar.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Credit:
+This project is under license [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The project has been developped by:
+Nicolas BRIET : Project Manager
+Nils BOURGON : Technical Manager
+Gilles LABROUSSE : Backend Manager
+Benoit MERGNY : UI Manager
