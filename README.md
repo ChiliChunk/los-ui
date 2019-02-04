@@ -10,13 +10,13 @@ Node packages server client side:
 [bcrypt](https://github.com/kelektiv/node.bcrypt.js/)
 
 ## Installation:
-Install and launch node.js server (this require a running mongodb on your computer)
+Install and launch node.js server (this require a running mongodb on your computer)<br/>
 ```$ git clone https://github.com/ChiliChunk/League-Of-Stones.git```<br/>
 ``` $ cd League-Of-Stones/```<br/>
 ```$ npm install```<br/>
 ```$ npm run start```<br/>
 
-Install and launch the react front end client (next to the League-Of-Stones foder)
+Install and launch the react front end client (next to the League-Of-Stones foder)<br/>
 ```$ git clone https://github.com/ChiliChunk/los-ui.git```<br/>
 ```$ cd los-ui/```<br/>
 ```$ npm install```<br/>
