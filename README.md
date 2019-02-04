@@ -23,8 +23,8 @@ Install and launch the react front end client (next to the League-Of-Stones fode
 ```$ npm run start```<br/>
 
 ## See the app running:
-The node.js server is running on localhost:3001<br/>
-The react client is running on localhost:3000 so you can acces the web application typing localhost:3001 on your brower serch bar.
+The node.js server is running on <b>localhost:3001</b><br/>
+The react client is running on <b>localhost:3000</b> so you can acces the web application typing <b>localhost:3000</b> on your brower serch bar.
 
 ## Credit:
 This project is under license [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)<br/>
