@@ -1,6 +1,6 @@
 # League of Stones
 
-This projet has been created with [Create React App](https://github.com/facebook/create-react-app).
+This projet has been created with [Create React App](https://github.com/facebook/create-react-app).<br/>
 
 Node packages used client side:
 [Material-ui](https://github.com/mui-org/material-ui)
@@ -23,14 +23,14 @@ Install and launch the react front end client (next to the League-Of-Stones fode
 ```$ npm run start```<br/>
 
 ## See the app running:
-The node.js server is running on localhost:3001
+The node.js server is running on localhost:3001<br/>
 The react client is running on localhost:3000 so you can acces the web application typing localhost:3001 on your brower serch bar.
 
 ## Credit:
-This project is under license [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
+This project is under license [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)<br/>
 
-The project has been developped by:
-Nicolas BRIET : Project Manager
-Nils BOURGON : Technical Manager
-Gilles LABROUSSE : Backend Manager
+The project has been developped by:<br/>
+Nicolas BRIET : Project Manager<br/>
+Nils BOURGON : Technical Manager<br/>
+Gilles LABROUSSE : Backend Manager<br/>
 Benoit MERGNY : UI Manager
