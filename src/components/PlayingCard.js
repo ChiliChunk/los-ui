@@ -18,7 +18,7 @@ class PlayingCard extends React.Component {
         const { name, attack, armor, keyChamp } = this.props
         return (
             <Card raised className={this.props.canAttack ? 'canAttack card' : 'card'}>
-                <CardActionArea>
+                <CardActionArea className="cardActionArea">
                     <img
                         className="imgCard"
                         src={"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/" + keyChamp + "_0.jpg"}

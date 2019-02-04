@@ -3,11 +3,20 @@
     width: 150px;
     border-radius: 80px;
 }
+.hero{
+    height:100%;
+    display: flex;
+    flex-direction: row;
+}
+.informations{
+    display: flex;
+    flex-direction: column !important;
+}
 
 .hp{
+    height: 50px;
     font-size: 2em;
     color: white;
-    margin-left: -25px;
     background-color: red;
     border-radius : 15px;
 }
@@ -15,13 +24,4 @@
 .goldenHero{
     border-style: solid;
     border-color: gold;
-}
-
-
-.ap{
-    font-size: 2em;
-    color: white;
-    margin-right: -25px;
-    background-color: blue;
-    border-radius : 15px;
 }
