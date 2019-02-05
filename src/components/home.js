@@ -34,7 +34,6 @@ class Home extends Component {
         this.props.history.push(process.env.PUBLIC_URL + "/game")
     }
     participate() {
-        console.log('call to participate')
         if (this.props.userReducer.userData.data) {
             axios
                 .get(
@@ -50,10 +49,6 @@ class Home extends Component {
                     }
                 });
         }
-    }
-
-    componentWillUnmount(){
-        console.log('UNMOUNT')
     }
 
     switchReady() {
@@ -100,7 +95,7 @@ class Home extends Component {
             .get(SERVER_URL + "/users/disconnect?token=" +
                 this.props.userReducer.userData.data.token)
             .then(res => {
-                console.log(res); if (res.data.status === "ok") {
+                if (res.data.status === "ok") {
                     alert("Vous étes deconnecté")
                     this.props.history.replace("/signin")
                 }
@@ -108,7 +103,6 @@ class Home extends Component {
     }
 
     closeDeckMaker() {
-        console.log("close deck")
         this.setState({ showDeckMaker: false })
     }
 
